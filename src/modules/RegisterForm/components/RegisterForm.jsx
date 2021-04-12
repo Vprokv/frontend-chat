@@ -1,16 +1,26 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Form, Input} from "antd";
 import {UserOutlined, LockOutlined,MailOutlined,InfoCircleTwoTone } from '@ant-design/icons';
 import {Button, Block} from "../../../components";
 import {Link} from 'react-router-dom';
 
+const success = false;
 
-class RegisterForm extends Component{
-    render() {
-        const success = true;
-        return (
+const RegisterForm = props => {
+    const {
+            values,
+            touched,
+            errors,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isValid,
+            isSubmitting
+    }
+= props;
+           return (
             <div>
-                <Block>
+
                     <div className="auth__top">
                         <h2>
                             Регистрация
@@ -19,13 +29,23 @@ class RegisterForm extends Component{
                             Для входа в чат,вам нужно зарегистрироваться
                         </p>
                     </div>
-                    {!success ?
-                        <form onSubmit={this.handleSubmit} className="login-form">
-                            <Form.Item validateStatus="success" hasFeedback>
+                <Block>
+                    {!success ?(
+                        <form onSubmit={handleSubmit} className="login-form">
+                            <Form.Item
+                                validateStatus={
+                                    !touched.email ? "":errors.email ? "error" : "success"
+                                }
+                                help={!touched.email ? "":errors.email }
+                                hasFeedback>
                                 <Input
+                                    id="email"
                                     prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
                                     size="Large"
                                     placeholder="E-Mail"
+                                    value={values.email}
+                                    onChange={handleSubmit}
+                                    onBlur={handleBlur}
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -35,12 +55,23 @@ class RegisterForm extends Component{
                                     placeholder="Ваше имя"
                                 />
                             </Form.Item>
-                            <Form.Item>
+                            <Form.Item
+                                validateStatus={
+                                    !touched.password ? "" : errors.password ? "error" : "success"
+                                }
+                                help={!touched.password ? "" : errors.password }
+                                hasFeedback>
                                 <Input
+                                    id="password"
                                     prefix={<LockOutlined  style={{color: "rgba(0,0,0,.25)"}}/>}
                                     type="password"
                                     size="large"
-                                    placeholder="Пароль"/>
+                                    placeholder="Пароль"
+                                    value={values.password}
+                                    onChange={handleSubmit}
+                                    onBlur={handleBlur}
+
+                                />
                             </Form.Item>
                             <Form.Item>
                                 <Input
@@ -51,6 +82,7 @@ class RegisterForm extends Component{
                             </Form.Item>
                             <Form.Item>
                                 <Button
+                                    onClick = {handleSubmit}
                                     type="primary"
                                     size="large"
                                     htmlType="submit"
@@ -63,7 +95,7 @@ class RegisterForm extends Component{
                                 to="/login">
                                 Войти в аккаунт
                             </Link>
-                        </form> :
+                        </form>) :(
                         <div
                             className="auth__success-block">
                             <InfoCircleTwoTone />
@@ -75,11 +107,11 @@ class RegisterForm extends Component{
                             </p>
                         </div>
 
-                        }
+                    ) }
                 </Block>
             </div>
         );
-    }
-}
+    };
+
 
 export default RegisterForm;

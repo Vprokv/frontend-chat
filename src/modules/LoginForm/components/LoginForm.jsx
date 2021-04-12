@@ -28,6 +28,7 @@ class LoginForm extends Component{
                         </Form.Item>
                         <Form.Item>
                             <Input
+                                id="password"
                                 prefix={<LockOutlined  style={{color: "rgba(0,0,0,.25)"}}/>}
                                 type="password"
                                 size="large"

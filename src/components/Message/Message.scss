@@ -1,19 +1,32 @@
 @import "../../styles/variables";
 
-.message{
-display: flex;
-max-width: 440px;
-  margin-bottom: 15px;
+.message {
+  $self: &;
 
-  &__avatar{
+  &__content {
+    display: flex;
+    max-width: 440px;
+    margin-bottom: 20px;
+    position: relative;
+
+    &:hover {
+      #{$self}__icon-actions {
+        display: block;
+      }
+    }
+  }
+
+
+  &__avatar {
     display: flex;
     flex-direction: column-reverse;
-    img{
+    img {
       border-radius: 50px;
       width: 33px;
       height: 33px;
       margin-right: 13px;
       margin-bottom: 23px;
+
     }
   }
 
@@ -32,5 +45,62 @@ max-width: 440px;
   &__text {
     color: #ffffff;
     line-height: 20px;
+  }
+
+  &__attachments {
+    display: flex;
+    margin-bottom: 5px;
+    &-item {
+      margin-right: 5px;
+      cursor: pointer;
+      img{
+        width: 45px;
+        height: 45px;
+        border-radius: 8px;
+
+      }
+    }
+  }
+
+  &__icon-readed {
+    position: absolute;
+    bottom: 22px;
+    left: -25px;
+
+    &--no{
+      left: -20px;
+    }
+  }
+
+  &--isMe {
+    display: flex;
+    flex-direction: row-reverse;
+
+    #{$self}__content {
+      margin-bottom: 15px;
+      flex-direction: row-reverse;
+    }
+
+    #{$self}__avatar {
+      img{
+        margin-right: 0;
+        margin-left: 13px;
+      }
+    }
+
+    #{$self}__info {
+      text-align: right;
+    }
+
+    #{$self}__bubble {
+      background: #ffffff;
+      border: 1px solid #ececec;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.0220444);
+      border-radius: 12px 12px 0px 12px;
+
+      #{$self}__text {
+        color: $black;
+      }
+    }
   }
 }

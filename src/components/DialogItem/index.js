@@ -6,6 +6,7 @@ import format from 'date-fns/format'
 import isToday from 'date-fns/isToday'
 
 
+
 const getMessageTime= created_at=>{
     if (isToday(created_at)) {
         return format(
@@ -33,7 +34,7 @@ const getAvatar = avatar=> {
     }
 };
 
-const DialogItem = ({user, message, unreaded}) =>(
+const DialogItem = ({user, unreaded, isMe, created_at, text}) =>(
     <div
         className={classNames('dialogs__item' , {
             'dialogs__item-online': user.isOnline
@@ -41,24 +42,24 @@ const DialogItem = ({user, message, unreaded}) =>(
     >
         <div className="dialogs__item-avatar">
             {/*<img src={user.avatar} alt={`${user.fullName} avatar`}/>*/}
-            {getAvatar
-            ("https://source.unsplash.com/100x100/?random1&nature,water"
-            )}
+            {getAvatar(user.avatar)}
 
         </div>
         <div className="dialogs__item-info">
             <div className="dialogs__item-info-top">
-                <b>Федор Достоевский</b>
+                <b>{user.fullName}</b>
                 <span>
-                    {getMessageTime(message.created_at)}
+                    {getMessageTime(created_at)}
                 </span>
             </div>
             <div className="dialogs__item-info-bottom">
                 <p>
-                    {message.text}
+                    {text}
                 </p>
-                <IconReaded isMe={true} isReaded={true}/>
-                {unreaded>0 && <div className="dialogs__item-info-bottom-count">{unreaded>9? "+9":unreaded}</div>}
+                {isMe && <IconReaded isMe={true} isReaded={true}/>}
+                {unreaded>0 && <div className="dialogs__item-info-bottom-count">
+                    {unreaded>9? "+9":unreaded}
+                </div>}
             </div>
         </div>
     </div>

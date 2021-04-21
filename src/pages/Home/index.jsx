@@ -1,26 +1,44 @@
 import React from 'react';
-import {Dialogs} from "../../components";
+import {Message, Dialogs} from "../../components";
 
 import "./Home.scss";
 
 const Home = () => (
     <section className="home">
         <Dialogs
+            userId={0}
             items={[
                 {
+                    _id: "cef468eeda569cc1b16b45fd53200b9c",
+                        text: 'Мы все свидетельствуем вам глубочайшее наше почтение и целуем ваши рученьки',
+                        // isReaded: false,
+                        created_at: new Date(),  //new Date('fri Apr 09 2021 08:18:54') //'fri Apr 09 2021 08:18:54'
+                        user: {
+                            _id: 1,
+                            fullName: "Федор Достоевский",
+                            avatar: null,
+                        }
+                },
+                {
                     _id: Math.random(),
+                    text: 'Привет! как твои дела?',
+                    // isReaded: false,
+                    created_at: new Date(),  //new Date('fri Apr 09 2021 08:18:54') //'fri Apr 09 2021 08:18:54'
                     user: {
-                        fullName: "Федор Достоевский",
-                        avatar: null,
-                    },
-                    lastMessage: {
-                        text: '123123',
-                        isReaded: false,
-                        created_at: "Mon Apr 19 2021 17:22:46"
+                        _id: 1,
+                        fullName: "Алан Тьюринг",
+                        avatar: "https://games.mail.ru/hotbox/content_files/gallery/b3/f4/1b6f0a10.jpeg",
                     }
-
                 }
             ]}
+        />
+
+        <Message
+            avatar=
+                "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
+            date={new Date('fri Apr 09 2021 08:11:54')}
+            audio="https://notificationsounds.com/storage/sounds/file-sounds-1148-juntos.mp3"
+
         />
 
         {/*<Message*/}

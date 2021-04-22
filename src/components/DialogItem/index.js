@@ -1,49 +1,33 @@
 import React from 'react';
 import classNames from "classnames";
-import {IconReaded} from "../"
+import {IconReaded, Avatar} from "../";
 import './DialogItem.scss';
-import format from 'date-fns/format'
-import isToday from 'date-fns/isToday'
+import format from 'date-fns/format';
+import isToday from 'date-fns/isToday';
+import ruLocale from 'date-fns/locale/ru'
 
 
 
-const getMessageTime= created_at=>{
-    if (isToday(created_at)) {
-        return format(
-            created_at,
-            'HH:mm'
-        );
+
+const getMessageTime = (created_at) => {
+    if (isToday(new Date(created_at))) {
+        return format(created_at, "HH:mm");
     } else {
-        return format(
-            created_at,
-            'DD.MM.YY'
-        );
+        return format(new Date(created_at), "MM.dd.yyyy", {
+            locale: ruLocale,
+        });
     }
 };
 
-const getAvatar = avatar=> {
-    if (avatar) {
-        return (
-            <img
-                src="https://source.unsplash.com/100x100/?random1&nature,water"
-                alt=""
-            />
-        );
-    } else {
 
-    }
-};
-
-const DialogItem = ({user, unreaded, isMe, created_at, text}) =>(
+const DialogItem = ({user, unread, isMe, created_at, text}) =>(
     <div
         className={classNames('dialogs__item' , {
             'dialogs__item-online': user.isOnline
         })}
     >
         <div className="dialogs__item-avatar">
-            {/*<img src={user.avatar} alt={`${user.fullName} avatar`}/>*/}
-            {getAvatar(user.avatar)}
-
+            <Avatar user={user}/>
         </div>
         <div className="dialogs__item-info">
             <div className="dialogs__item-info-top">
@@ -57,8 +41,8 @@ const DialogItem = ({user, unreaded, isMe, created_at, text}) =>(
                     {text}
                 </p>
                 {isMe && <IconReaded isMe={true} isReaded={true}/>}
-                {unreaded>0 && <div className="dialogs__item-info-bottom-count">
-                    {unreaded>9? "+9":unreaded}
+                {unread>0 && <div className="dialogs__item-info-bottom-count">
+                    {unread>9? "+9":unread}
                 </div>}
             </div>
         </div>

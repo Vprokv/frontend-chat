@@ -38,17 +38,17 @@ const RegisterForm = props => {
                                 <Input
                                     id="email"
                                     prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    size="Large"
+                                    size="large"
                                     placeholder="E-Mail"
                                     value={values.email}
-                                    handleChange={handleChange}
+                                    onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
                             </Form.Item>
                             <Form.Item>
                                 <Input
                                     prefix={<UserOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    size="Large"
+                                    size="large"
                                     placeholder="Ваше имя"
                                 />
                             </Form.Item>

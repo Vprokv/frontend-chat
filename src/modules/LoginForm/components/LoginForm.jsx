@@ -37,7 +37,7 @@ return (
                     <Input
                         id="email"
                         prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                        size="Large"
+                        size="large"
                         placeholder="E-Mail"
                         value={values.email}
                         onChange={handleChange}

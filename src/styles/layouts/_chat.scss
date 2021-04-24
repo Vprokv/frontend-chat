@@ -1,0 +1,51 @@
+.chat {
+  display: flex;
+  background-color: #ffffff;
+  width: 1140px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.04204);
+
+  &__sidebar {
+    width: 320px;
+    border-right: 1px solid #f7f7f7;
+
+    &-header{
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+
+      &>div{
+        i{
+          display: inline-block;
+          margin-right: 5px;
+        }
+      }
+    }
+   &-search{
+     padding: 0 20px 20px 20px  ;
+     .ant-input {
+       background-color: #f7f8f9;
+       border: 0;
+       height: 38px;
+       padding: 4px 11px 6px;
+     }
+     .ant-btn{
+       background-color: #f7f8f9;
+       border: 0;
+       box-shadow: 0 0 0 ;
+     }
+   }
+
+
+    &-dialogs{
+      .dialogs{
+        padding: 0 20px;
+      }
+    }
+  }
+
+  &__dialog {
+    flex: 1;
+  }
+
+}

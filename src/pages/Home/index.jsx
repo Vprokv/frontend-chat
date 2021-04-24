@@ -26,7 +26,7 @@ const Home = () => (
                         onSearch={onSearch}
                     />
                 </div>
-                <div className="chat_sidebar-dialogs">
+                <div className="chat__sidebar-dialogs">
                     <Dialogs
                         userId={0}
                         items={[

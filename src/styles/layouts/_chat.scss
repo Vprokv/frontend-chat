@@ -1,5 +1,6 @@
 .chat {
   display: flex;
+  height: 100%;
   background-color: #ffffff;
   width: 1140px;
   margin: 0 auto;
@@ -37,15 +38,51 @@
    }
 
 
-    &-dialogs{
-      .dialogs{
-        padding: 0 20px;
+    &-dialogs {
+      .dialogs {
+        &__item {
+          padding: 10px 20px;
+          margin-bottom: 0;
+          cursor: pointer;
+
+          &.active,
+          &:hover {
+            background-color: #f3f7ff;
+          }
+        }
       }
     }
   }
 
   &__dialog {
     flex: 1;
-  }
 
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 21px;
+      height: 58px;
+      border-bottom: 1px solid #f7f7f7;
+      margin-bottom: 20px;
+
+      &-center {
+        text-align: center;
+
+      }
+
+      &-username {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+
+      }
+    }
+
+    &-messages{
+      padding: 20px 20px 0 20px;
+      overflow: auto;
+      height: calc(100% - 160px);
+    }
+  }
 }

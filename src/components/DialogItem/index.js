@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from "classnames";
 import {IconReaded, Avatar} from "../";
-import './DialogItem.scss';
+
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
 import ruLocale from 'date-fns/locale/ru'

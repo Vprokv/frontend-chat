@@ -33,7 +33,7 @@ const ChatInput = props => {
             </div>
         </div>
     );
-}
+};
 
 ChatInput.propTypes = {
     className: PropTypes.string

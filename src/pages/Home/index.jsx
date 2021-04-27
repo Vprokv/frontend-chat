@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {Message, Dialogs, Status, ChatInput} from "../../components";
-import {TeamOutlined, FormOutlined, EllipsisOutlined, CameraOutlined} from '@ant-design/icons';
-import { Input, Button } from 'antd';
+import {Message,  Status, ChatInput} from "../../components";
+import { Dialogs } from "../../containers";
+import {TeamOutlined, FormOutlined, EllipsisOutlined} from '@ant-design/icons';
+import { Button } from 'antd';
 
 import "./Home.scss";
+import Messages from "../../components/Messages";
 
-const { Search } = Input;
-const onSearch = value => console.log(value);
 
 const Home = () => (
     <section className="home">
@@ -21,12 +21,7 @@ const Home = () => (
                     </div>
                     <Button type="link" icon={<FormOutlined/>} />
 
-                </div>
-                <div className="chat__sidebar-search">
-                    <Search
-                        placeholder="Поиск среди контактов"
-                        onSearch={onSearch}
-                    />
+
                 </div>
                 <div className="chat__sidebar-dialogs">
                     <Dialogs
@@ -59,6 +54,126 @@ const Home = () => (
                                 "user": {
                                     "_id": "e079c8cddf392c639c7e77481717352a",
                                     "fullName": "Stanton Alford",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                "text": "Ut elit enim enim cupidatat ut velit eiusmod. Duis sint labore non velit elit qui do sunt in non nisi. Consectetur deserunt irure magna mollit aute.",
+                                "created_at": "Wed Sep 19 1979 20:02:43 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                    "fullName": "Preston Cohen",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "f31af49941293524c86c746c10e72f0d",
+                                "text": "Eiusmod commodo velit proident sint enim. Commodo cupidatat laboris anim nisi id dolor fugiat sint adipisicing. Anim exercitation enim consequat duis.",
+                                "created_at": "Sun Jun 25 2017 16:15:58 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "f31af49941293524c86c746c10e72f0d",
+                                    "fullName": "Lenore Vinson",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                "text": "Minim ad consectetur consectetur laborum do consequat Lorem nisi mollit ex aute anim consectetur voluptate. Nostrud Lorem velit duis ut esse cillum exercitation occaecat. Adipisicing labore aliqua in ut fugiat labore magna.",
+                                "created_at": "Wed Apr 01 1970 14:35:56 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                    "fullName": "Audrey Lopez",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                "text": "Ut elit enim enim cupidatat ut velit eiusmod. Duis sint labore non velit elit qui do sunt in non nisi. Consectetur deserunt irure magna mollit aute.",
+                                "created_at": "Wed Sep 19 1979 20:02:43 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                    "fullName": "Preston Cohen",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "f31af49941293524c86c746c10e72f0d",
+                                "text": "Eiusmod commodo velit proident sint enim. Commodo cupidatat laboris anim nisi id dolor fugiat sint adipisicing. Anim exercitation enim consequat duis.",
+                                "created_at": "Sun Jun 25 2017 16:15:58 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "f31af49941293524c86c746c10e72f0d",
+                                    "fullName": "Lenore Vinson",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                "text": "Minim ad consectetur consectetur laborum do consequat Lorem nisi mollit ex aute anim consectetur voluptate. Nostrud Lorem velit duis ut esse cillum exercitation occaecat. Adipisicing labore aliqua in ut fugiat labore magna.",
+                                "created_at": "Wed Apr 01 1970 14:35:56 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                    "fullName": "Audrey Lopez",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                "text": "Ut elit enim enim cupidatat ut velit eiusmod. Duis sint labore non velit elit qui do sunt in non nisi. Consectetur deserunt irure magna mollit aute.",
+                                "created_at": "Wed Sep 19 1979 20:02:43 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                    "fullName": "Preston Cohen",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "f31af49941293524c86c746c10e72f0d",
+                                "text": "Eiusmod commodo velit proident sint enim. Commodo cupidatat laboris anim nisi id dolor fugiat sint adipisicing. Anim exercitation enim consequat duis.",
+                                "created_at": "Sun Jun 25 2017 16:15:58 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "f31af49941293524c86c746c10e72f0d",
+                                    "fullName": "Lenore Vinson",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                "text": "Minim ad consectetur consectetur laborum do consequat Lorem nisi mollit ex aute anim consectetur voluptate. Nostrud Lorem velit duis ut esse cillum exercitation occaecat. Adipisicing labore aliqua in ut fugiat labore magna.",
+                                "created_at": "Wed Apr 01 1970 14:35:56 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                    "fullName": "Audrey Lopez",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                "text": "Ut elit enim enim cupidatat ut velit eiusmod. Duis sint labore non velit elit qui do sunt in non nisi. Consectetur deserunt irure magna mollit aute.",
+                                "created_at": "Wed Sep 19 1979 20:02:43 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "6e68d13b2678d793d340b5fb0c79297d",
+                                    "fullName": "Preston Cohen",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "f31af49941293524c86c746c10e72f0d",
+                                "text": "Eiusmod commodo velit proident sint enim. Commodo cupidatat laboris anim nisi id dolor fugiat sint adipisicing. Anim exercitation enim consequat duis.",
+                                "created_at": "Sun Jun 25 2017 16:15:58 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "f31af49941293524c86c746c10e72f0d",
+                                    "fullName": "Lenore Vinson",
+                                    "avatar": null
+                                }
+                            },
+                            {
+                                "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                "text": "Minim ad consectetur consectetur laborum do consequat Lorem nisi mollit ex aute anim consectetur voluptate. Nostrud Lorem velit duis ut esse cillum exercitation occaecat. Adipisicing labore aliqua in ut fugiat labore magna.",
+                                "created_at": "Wed Apr 01 1970 14:35:56 GMT+0000 (UTC)",
+                                "user": {
+                                    "_id": "2f0405c6a12d20a5acbd91db41c016b8",
+                                    "fullName": "Audrey Lopez",
                                     "avatar": null
                                 }
                             },
@@ -145,105 +260,14 @@ const Home = () => (
                             <Status online/>
                         </div>
                     </div>
-                    <Button type="link" icon={<EllipsisOutlined style={{fontSize: "22px"}}/>} />
-
+                    <EllipsisOutlined style={{fontSize: "22px"}}/>
                 </div>
                 <div className="chat__dialog-messages">
-                    <Message
-                        avatar=
-                            "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                        date={new Date('fri Apr 09 2021 08:11:54')}
-                        audio="https://notificationsounds.com/storage/sounds/file-sounds-1148-juntos.mp3"
-
-                    />
-
-                    <Message
-                        avatar=
-                            "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                        text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                        date={new Date('fri Apr 09 2021 08:11:54')}
-                        attachments={[
-                            {
-                                filename: "image.jpg",
-                                url: "https://source.unsplash.com/100x100/?random1&nature,water",
-                            },
-                            {
-                                filename: "image.jpg",
-                                url: "https://source.unsplash.com/100x100/?random2&nature,water",
-                            },
-                            {
-                                filename: "image.jpg",
-                                url: "https://source.unsplash.com/100x100/?random3&nature,water",
-                            }
-                        ]}
-                    />
-                    <Message
-                        avatar="https://avatarko.ru/img/avatarka/100na100/risunki_green_face.gif"
-                        text="Hello world!"
-                        date={new Date('fri Apr 09 2021 08:18:54')}
-                        isMe={true}
-                        isReaded={false}
-
-                    />
-
-                    <Message
-                        avatar="https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                        attachments={[
-                            {
-                                filename: "image.jpg",
-                                url: "https://source.unsplash.com/100x100/?random1&nature,water",
-                            }
-                        ]}
-
-                    />
-                    <Message
-                        avatar=
-                            "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                        text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                        date={new Date('fri Apr 09 2021 08:11:54')}
-
-                    /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                /><Message
-                    avatar=
-                        "https://sun1-85.userapi.com/s/v1/if1/9wBzET9Rdzn3NRIy8EU4F9ysjpL7dr8rArA091w9ReavFRbfwkEd0N84HJdXwP-kgqPZ_5Lw.jpg?size=100x0&quality=96&crop=0,0,916,916&ava=1"
-                    text="Мы тут недавно войска Ариовиста разбили, чуваки хотели закрепиться на галльских землях лол"
-                    date={new Date('fri Apr 09 2021 08:11:54')}
-
-                />
+                    <Messages />
 
                 </div>
                 <div className="chat__dialog-input">
-                    <Button type="link" icon={<ChatInput/>} />
-
+                    <ChatInput/>
                 </div>
             </div>
         </div>

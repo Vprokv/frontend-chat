@@ -10,21 +10,26 @@
   span {
     cursor: pointer;
     font-size: 20px;
-    margin-top: 6px;
+    margin-top: 10px;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__actions {
     display: flex;
-    width: 80px;
+    width: 70px;
     justify-content: space-between;
-    margin-left: 15px;
+    margin-left: 20px;
   }
 
-
+  .ant-btn-link{
+    box-shadow: none;
+    color: #202020 !important;
+  }
 
   input {
-    padding: 6px 11px 8px;
-    font-size: 14px;
     &:focus {
       box-shadow: none;
 

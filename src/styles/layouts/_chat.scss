@@ -10,10 +10,16 @@
     width: 320px;
     border-right: 1px solid #f7f7f7;
 
-    &-header{
+
+    &-header {
       display: flex;
       justify-content: space-between;
       padding: 20px;
+      align-items: center;
+
+
+
+
 
       &>div{
         i{
@@ -22,24 +28,13 @@
         }
       }
     }
-   &-search{
-     padding: 0 20px 20px 20px  ;
-     .ant-input {
-       background-color: #f7f8f9;
-       border: 0;
-       height: 38px;
-       padding: 4px 11px 6px;
-     }
-     .ant-btn{
-       background-color: #f7f8f9;
-       border: 0;
-       box-shadow: 0 0 0 ;
-     }
-   }
 
 
     &-dialogs {
+      height: calc(100% - 136px);
       .dialogs {
+        height: 100%;
+        overflow: auto;
         &__item {
           padding: 10px 20px;
           margin-bottom: 0;
@@ -80,7 +75,7 @@
     }
 
     &-messages{
-      padding: 20px 20px 0 20px;
+      padding: 20px;
       overflow: auto;
       height: calc(100% - 160px);
     }

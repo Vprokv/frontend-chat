@@ -1,17 +1,15 @@
-import React, {useState} from 'react';
-import {Dialogs as BaseDialogs} from '../components';
+import React, { useState } from "react";
+import { Dialogs as BaseDialogs } from "../components";
 
-const Dialogs = ({items, userId }) => {
-    const [InputValue, setValue] = useState('');
+const Dialogs = ({ items, userId }) => {
+    const [inputValue, setValue] = useState("");
     const [filtred, setFiltredItems] = useState(Array.from(items));
-
-
 
     const onChangeInput = value => {
         setFiltredItems(
             items.filter(
-            dialog =>
-                dialog.user.fullName.toLowerCase().indexOf(value.toLowerCase()) >= 0
+                dialog =>
+                    dialog.user.fullName.toLowerCase().indexOf(value.toLowerCase()) >= 0
             )
         );
         setValue(value);
@@ -19,10 +17,10 @@ const Dialogs = ({items, userId }) => {
 
     return (
         <BaseDialogs
-            userId={ userId }
+            userId={userId}
             items={filtred}
             onSearch={onChangeInput}
-            inputValue={InputValue}
+            inputValue={inputValue}
         />
     );
 };

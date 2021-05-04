@@ -7,11 +7,18 @@
     margin-right: 15px;
   }
 
+  &__emoji-picker {
+    position: absolute;
+    bottom: 50px;
+    z-index: 1;
+  }
+
   span {
     cursor: pointer;
     font-size: 20px;
     margin-top: 10px;
     opacity: 0.5;
+
     &:hover {
       opacity: 1;
     }
@@ -22,6 +29,18 @@
     width: 70px;
     justify-content: space-between;
     margin-left: 20px;
+
+    &-upload-btn{
+      cursor: pointer;
+      input{
+        cursor: pointer;
+      }
+      &:hover{
+        button{
+          opacity: 1;
+        }
+      }
+    }
   }
 
   .ant-btn-link{

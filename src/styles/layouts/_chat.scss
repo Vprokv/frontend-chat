@@ -32,9 +32,6 @@
 
     &-dialogs {
       height: calc(100% - 136px);
-      ;
-
-
 
       .dialogs {
         height: 100%;
@@ -44,10 +41,7 @@
           margin-bottom: 0;
           cursor: pointer;
 
-          &.active,
-          &:hover {
-            background-color: #f3f7ff;
-          }
+
         }
       }
     }
@@ -86,9 +80,8 @@
     }
 
     &-messages{
-      padding: 20px;
-      overflow: auto;
-      height: calc(100% - 160px);
+
+      height: calc(100% - 138px);
     }
   }
 }

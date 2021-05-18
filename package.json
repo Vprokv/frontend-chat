@@ -95,6 +95,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://localhost:3001/",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -163,5 +164,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "formik": "^2.2.6"
   }
 }

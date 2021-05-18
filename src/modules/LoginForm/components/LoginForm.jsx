@@ -15,7 +15,8 @@ const LoginForm = props =>{
     handleBlur,
     handleSubmit,
     isValid,
-    isSubmitting
+    isSubmitting,
+        status
 }
 = props;
 return (

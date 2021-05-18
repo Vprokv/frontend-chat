@@ -1,25 +1,36 @@
+
 import {withFormik} from "formik";
 
-import validateForm from "../../../../src/utils/validate"
 import LoginForm from "../components/LoginForm";
 
-export default withFormik({
+import validateForm from "../../../../src/utils/validate"
+import {userActions} from "../../../redux/actions";
+
+import store from '../../../redux/store';
+
+const LoginFormContainer = withFormik({
     enableReinitialize: true,
-    mapPropsToValues:()=>({
-     email: "",
-     password:""
+    mapPropsToValues: () => ({
+        email: "",
+        password: ""
     }),
-    validate: values=> {
+    validate: values => {
         let errors = {};
         validateForm({isAuth: true, values, errors});
-
-
         return errors;
-    }, handleSubmit: (values, {setSubmitting}) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 1000);
+    },
+    handleSubmit: (values, { setSubmitting, props }) => {
+        store.dispatch(userActions.fetchUserLogin(values)).then(({ status }) => {
+            if (status === "success") {
+                setTimeout(() => {
+                    props.history.push("/");
+                }, );
+            }
+           setSubmitting(false);
+       });
     },
     displayName: "LoginForm"
 })(LoginForm);
+
+
+export default LoginFormContainer;

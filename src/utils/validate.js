@@ -17,6 +17,17 @@ const rules ={
         ) {
             errors.password = "Слишком легкий пароль";
         }
+    },
+    password_2: (value)=>{
+        if (!isAuth && value !==values.password) {
+            errors.password_2 = "Пароли не совпадают";
+        }
+    },
+
+    fullName: (value)=>{
+        if (!isAuth && !value) {
+            errors.fullName = "Введите имя и фамилию" ;
+        }
     }
 };
     Object.keys(values).forEach(

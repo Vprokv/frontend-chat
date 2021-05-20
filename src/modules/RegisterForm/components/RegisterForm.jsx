@@ -1,9 +1,8 @@
 import React from 'react';
 import {Form, Input} from "antd";
 import {UserOutlined, LockOutlined,MailOutlined,InfoCircleTwoTone } from '@ant-design/icons';
-import {Button, Block} from "../../../components";
+import {Button, Block, FormField} from "../../../components";
 import {Link} from 'react-router-dom';
-import {validateField} from "../../../utils/helpers"
 const success = false;
 
 const RegisterForm = props => {
@@ -29,71 +28,74 @@ const RegisterForm = props => {
                         </p>
                     </div>
                 <Block>
-                    {!success ?(
+                    {!success ? (
                         <form onSubmit={handleSubmit} className="login-form">
-                            <Form.Item
-                                validateStatus={validateField('email', touched, errors)}
-                                help={!touched.email ? "":errors.email }
-                                hasFeedback>
-                                <Input
-                                    id="email"
-                                    prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    size="large"
-                                    placeholder="E-Mail"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <Input
-                                    prefix={<UserOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    size="large"
-                                    placeholder="Ваше имя"
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                validateStatus={validateField('password', touched, errors)}
-                                help={!touched.password ? "" : errors.password }
-                                hasFeedback>
-                                <Input
-                                    id="password"
-                                    prefix={<LockOutlined  style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    type="password"
-                                    size="large"
-                                    placeholder="Пароль"
-                                    value={values.password}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                            <FormField
+                                name="email"
+                                prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
+                                placeholder="E-mail"
+                                handleChange={handleChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                values={values}
+                            />
 
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                validateStatus={validateField('password', touched, errors)}
-                            >
-                                <Input
-                                    prefix={<LockOutlined  style={{color: "rgba(0,0,0,.25)"}}/>}
-                                    type="password2"
-                                    size="large"
-                                    placeholder="Повторите пароль"/>
-                            </Form.Item>
+                            <FormField
+                                name="fullName"
+                                prefix={<UserOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
+                                placeholder="Ваше имя"
+                                handleChange={handleChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                values={values}
+                            />
+
+                            <FormField
+                                name="password"
+                                prefix={<LockOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
+                                placeholder="Пароль"
+                                handleChange={handleChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                values={values}
+                                type="password"
+                            />
+
+                            <FormField
+                                name="password_2"
+                                prefix={<LockOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
+                                placeholder="Повторите пароль"
+                                handleChange={handleChange}
+                                handleBlur={handleBlur}
+                                touched={touched}
+                                errors={errors}
+                                values={values}
+                                type="password"
+                            />
+
                             <Form.Item>
                                 {isSubmitting && !isValid && <span> Ошибка!</span>}
                                 <Button
+                                    disabled={isSubmitting}
                                     onClick = {handleSubmit}
                                     type="primary"
+                                    className="login-form-button"
                                     size="large"
-                                    htmlType="submit"
-                                    className="login-form-button">
+                                >
+
                                     Зарегистрироваться
                                 </Button>
                             </Form.Item>
                             <Link
                                 className="auth__register-link"
-                                to="/login">
+                                to="/signIn">
                                 Войти в аккаунт
                             </Link>
-                        </form>) :(
+                        </form>
+                    ) :(
                         <div
                             className="auth__success-block">
                             <InfoCircleTwoTone />

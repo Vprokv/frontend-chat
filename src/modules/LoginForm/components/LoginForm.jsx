@@ -16,7 +16,7 @@ const LoginForm = props =>{
     handleSubmit,
     isValid,
     isSubmitting,
-        status
+
 }
 = props;
 return (
@@ -74,7 +74,7 @@ return (
                 </Form.Item>
                 <Link
                     className="auth__register-link"
-                    to="/register">
+                    to="/signUp">
                     Зарегистрироваться
                 </Link>
             </form>

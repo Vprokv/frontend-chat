@@ -1,6 +1,8 @@
 import {axios} from '../../core';
 
 export default {
-    login: (postData) => axios.post("/user/login" , postData),
+    signIn: (postData) => axios.post("/user/signIn", postData),
+    signUp: (postData) => axios.post("/user/signUp", postData),
+    verifyHash: hash => axios.post("/user/verify?hash=" + hash),
     getMe: () => axios.get("/user/me")
 };

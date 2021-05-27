@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from "classnames";
 import {IconReaded, Avatar} from "../";
+import {Link} from 'react-router-dom'
+
 
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
@@ -17,47 +19,52 @@ const getMessageTime = (created_at) => {
             locale: ruLocale,
         });
     }
+
 };
 
 
 const DialogItem = ({
                         _id,
-                        user,
                         unread,
                         isMe,
                         created_at,
                         text,
                         currentDialogId,
-                        onSelect
+                        onSelect,
+                        lastMessage
 }) =>(
+<Link to={`/dialog/${_id}`}>
     <div
+
         className={classNames('dialogs__item' , {
-            'dialogs__item--online': user.isOnline,
+            'dialogs__item--online': lastMessage.user.isOnline,
             'dialogs__item--selected': currentDialogId===_id
         })}
         onClick={onSelect.bind(this, _id)}
     >
         <div className="dialogs__item-avatar">
-            <Avatar user={user}/>
+            <Avatar user={lastMessage.user}/>
         </div>
         <div className="dialogs__item-info">
             <div className="dialogs__item-info-top">
-                <b>{user.fullName}</b>
+                <b>{lastMessage.user.fullName}</b>
                 <span>
-                    {getMessageTime(created_at)}
+
+                    {getMessageTime(lastMessage.created_at)}
                 </span>
             </div>
             <div className="dialogs__item-info-bottom">
                 <p>
-                    {text}
+                    {lastMessage.text}
                 </p>
                 {isMe && <IconReaded isMe={true} isReaded={true}/>}
-                {unread>0 && <div className="dialogs__item-info-bottom-count">
-                    {unread>9? "+9":unread}
+                {lastMessage.unread>0 && <div className="dialogs__item-info-bottom-count">
+                    {lastMessage.unread>9? "+9":lastMessage.unread}
                 </div>}
             </div>
         </div>
     </div>
+</Link>
 );
 
 

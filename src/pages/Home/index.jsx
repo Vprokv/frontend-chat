@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Status, ChatInput} from "../../components";
-import { Dialogs, Messages } from "../../containers";
+
+import { Dialogs, Messages, ChatInput, Status } from "../../containers";
 import {TeamOutlined, FormOutlined, EllipsisOutlined} from '@ant-design/icons';
 import { Button } from 'antd';
 
@@ -33,12 +33,8 @@ const Home = () => (
             <div className="chat__dialog">
                 <div className="chat__dialog-header">
                     <div/>
-                    <div className="chat__dialog-header-center">
-                        <b className="chat__dialog-header-username">Гай Юлий Цезарь</b>
-                        <div className="chat__dialog-header-status">
-                            <Status online/>
-                        </div>
-                    </div>
+                    <Status online/>
+
                     <EllipsisOutlined style={{fontSize: "22px"}}/>
                 </div>
                 <div className="chat__dialog-messages">

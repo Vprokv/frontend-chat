@@ -21,9 +21,10 @@
 
 
     &__item {
+        $item: &;
         display: flex;
         margin-bottom: 20px;
-        $item: &;
+        color: $black;
 
         &.active,
         &:hover {

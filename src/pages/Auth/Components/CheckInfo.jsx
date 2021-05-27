@@ -47,10 +47,11 @@ const CheckInfo = ({location, history}) => {
                     title={info.status === "success" ? "Готово" : "Ошибка"}
                     subTitle={info.message}
                     extra={
-                        info.status === "success" && verified &&
+                        info.status === "success" &&
+                        verified &&
                             <Button
                             type="primary"
-                            onClick={() =>history.push('/')}
+                            onClick={() =>history.push('/signIn')}
                         >
                             Войти
                         </Button>

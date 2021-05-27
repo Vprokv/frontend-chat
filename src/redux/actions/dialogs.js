@@ -3,12 +3,12 @@ import {dialogsApi} from "../../utils/api";
 
 const Actions = {
     setDialogs: items=> ({
-        type: "DIALOGS: SET_ITEMS",
+        type: "DIALOGS:SET_ITEMS",
         payload: items
     }),
     setCurrentDialogId: id=> ({
 
-        type: "DIALOGS: SET_CURRENT_DIALOG_ID",
+        type: "DIALOGS:SET_CURRENT_DIALOG_ID",
         payload: id
     }),
     fetchDialogs: () => dispatch => {

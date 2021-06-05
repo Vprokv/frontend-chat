@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './Status.scss';
 
-const Status = ({online}, fullName) => (
+const Status = ({online, fullName}) => (
     <div className="chat__dialog-header-center">
         <b className="chat__dialog-header-username">{fullName}</b>
         <div className="chat__dialog-header-status">
@@ -19,6 +19,7 @@ const Status = ({online}, fullName) => (
 
 Status.propTypes = {
     online: PropTypes.bool,
+    fullName: PropTypes.string,
 };
 
 export default Status;

@@ -8,8 +8,10 @@ import {convertCurrentTime} from "../../utils/helpers"
 import waveSvg from '../../assets/img/wave.svg';
 import pauseSvg from '../../assets/img/pause.svg';
 import playSvg from '../../assets/img/play.svg';
+import {Popover, Button} from "antd";
 
 import {Time, IconReaded, Avatar} from "../"
+import {EllipsisOutlined} from "@ant-design/icons";
 
 const MessageAudio = ({ audioSrc }) => {
     const audioElem = useRef(null);
@@ -94,7 +96,8 @@ const Message = ({
                      isMe,
                      isReaded,
                      attachments,
-                     isTyping
+                     isTyping,
+                     onRemoveMessage
                  }) => {
     return (
         <div
@@ -107,6 +110,20 @@ const Message = ({
         >
             <div className="message__content">
                 <IconReaded isMe={isMe} isReaded={isReaded} />
+                <Popover
+                    content={
+                    <div>
+                        <Button onClick={onRemoveMessage}>Удалить сообщение</Button>
+                    </div>
+                }>
+                    <div className="message__icon-actions">
+                        <Button>
+                            <EllipsisOutlined style={{fontSize: "18px"}}/>
+                        </Button>
+
+                    </div>
+
+                </Popover>
                 <div className="message__avatar">
                     <Avatar user={user}/>
 
@@ -149,7 +166,8 @@ const Message = ({
 
 
 Message.defaultProps = {
-    user: {}
+    user: {},
+
 
 };
 

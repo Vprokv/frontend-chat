@@ -12,30 +12,30 @@ const Dialogs = ({
                      addMessage,
                      items,
                      user,
-                     isLoading
+                     isLoading,
+                     removeMessageById
                  }) => {
     const messagesRef = useRef(null);
 
+
     const onNewMessage = data => {
         addMessage(data);
-    }
+    };
 
     useEffect(() => {
         if (currentDialogId) {
+
             fetchMessages(currentDialogId);
         }
+
         socket.on("SERVER:NEW_MESSAGE", onNewMessage);
 
-        return () => {
-            socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
-        }
+        return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
     }, [currentDialogId]);
 
     useEffect(() => {
-            messagesRef.current.scrollTo(0, 9999999);
+        messagesRef.current.scrollTo(0, 999999);
     }, [items]);
-
-
 
     return (
         <BaseMessages
@@ -43,12 +43,13 @@ const Dialogs = ({
             blockRef={messagesRef}
             items={items}
             isLoading={isLoading}
+            onRemoveMessage={removeMessageById}
         />
     );
 };
 
 export default connect(
-    ({dialogs, messages, user}) => ({
+    ({ dialogs, messages, user }) => ({
         currentDialogId: dialogs.currentDialogId,
         items: messages.items,
         isLoading: messages.isLoading,

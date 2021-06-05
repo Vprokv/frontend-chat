@@ -7,7 +7,13 @@ import {Input, Empty} from "antd";
 
 const { Search } = Input;
 
-const Dialogs = ({items, userId, onSearch, inputValue, currentDialogId, onSelectDialog}) =>(
+const Dialogs = ({
+                     items,
+                     userId,
+                     onSearch,
+                     inputValue,
+                     currentDialogId,
+                     onSelectDialog}) =>(
     <div className="dialogs">
         <div className="dialogs__search">
             <Search
@@ -17,7 +23,7 @@ const Dialogs = ({items, userId, onSearch, inputValue, currentDialogId, onSelect
             />
         </div>
         {items.length ? (
-            orderBy(items, ["created_at"], ["desc"]).map(item => (
+            orderBy(items, ["createdAt"], ["desc"]).map(item => (
                 <DialogItem
                     key={item._id}
                     onSelect={onSelectDialog}

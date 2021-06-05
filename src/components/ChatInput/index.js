@@ -16,12 +16,15 @@ const ChatInput = props => {
         setShowEmojiPicker(!emojiPickerVisible);
     };
 
-    const handleSendMassage = (e) => {
+
+    const handleSendMessage = (e) => {
         if (e.keyCode === 13) {
+
             onSendMessage(value, currentDialogId)
             setValue('');
         }
     }
+
 
     return (
         <div className="chat-input">
@@ -42,7 +45,7 @@ const ChatInput = props => {
 
             <Input
                 onChange={e => setValue(e.target.value)}
-                onKeyUp={handleSendMassage}
+                onKeyUp={handleSendMessage}
                 placeholder="Введите текст сообщения..."
                 size="large"
                 value={value}

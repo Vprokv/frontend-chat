@@ -18,7 +18,7 @@ const RegisterForm = props => {
     }
 = props;
            return (
-            <div>
+            <>
                     <div className="auth__top">
                         <h2>
                             Регистрация
@@ -109,7 +109,7 @@ const RegisterForm = props => {
 
                     ) }
                 </Block>
-            </div>
+            </>
         );
     };
 

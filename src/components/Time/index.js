@@ -4,9 +4,9 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import ru from 'date-fns/locale/ru'
 
 const Time = ({date})=>(
-        <Fragment>
+        <>
             {formatDistanceToNow(date, {addSuffix: true, locale: ru})}
-        </Fragment>
+        </>
     );
 
 

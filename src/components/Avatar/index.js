@@ -4,7 +4,8 @@ import './Avatar.scss';
 import {generateAvatarFromHash} from "../../utils/helpers";
 
 
-const Avatar = ({user}) => {
+
+const Avatar = ({user, partner, isMe}) => {
     if (user.avatar) {
         return (
             <img
@@ -28,8 +29,16 @@ const Avatar = ({user}) => {
     }
 };
 
+Avatar.defaultProps = {
+    partner: {},
+    isMe: PropTypes.bool.isRequired
+
+
+};
+
 Avatar.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+
 };
 
 export default Avatar;

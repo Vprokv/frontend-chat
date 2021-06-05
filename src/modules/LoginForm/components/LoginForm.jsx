@@ -20,7 +20,7 @@ const LoginForm = props =>{
 }
 = props;
 return (
-    <React.Fragment>
+    <>
         <div className="auth__top">
             <h2>
                 Войти в аккаунт
@@ -79,7 +79,7 @@ return (
                 </Link>
             </form>
         </Block>
-    </React.Fragment>
+    </>
 );
 
 }

@@ -4,12 +4,12 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import {Provider} from "react-redux";
 
 import App from './App';
-import {userActions} from "./redux/actions";
+import {userActions} from "./pages/Chat/redux/actions";
 
-import store from "../src/redux/store"
+import store from "./pages/Chat/redux/store"
 import './styles/index.scss';
 import 'emoji-mart/css/emoji-mart.css'
-import "./core/socket"
+import "./pages/Chat/core/socket"
 
 store.dispatch(userActions.fetchUserData());
 

@@ -7,6 +7,7 @@ import socket from "../core/socket";
 import {Messages as BaseMessages} from "./components";
 
 const Dialogs = ({
+    className,
                      currentDialogId,
                      fetchMessages,
                      addMessage,
@@ -39,6 +40,7 @@ const Dialogs = ({
 
     return (
         <BaseMessages
+            className={className}
             user={user}
             blockRef={messagesRef}
             items={items}

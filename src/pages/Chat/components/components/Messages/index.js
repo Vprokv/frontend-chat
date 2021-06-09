@@ -6,11 +6,12 @@ import './Messages.scss';
 
 import {Message} from "../index";
 
-const Messages = ({onRemoveMessage, blockRef, isLoading, items, user}) => {
+const Messages = ({onRemoveMessage, blockRef, isLoading, items, user, className}) => {
     return(
         <div
             ref={blockRef}
-            className={classNames("messages", {"messages--loading": isLoading})}>
+            className={`message ${className} ${isLoading} ${isLoading ? "messages--loading" : ""}`}
+        >
             {isLoading? (
                 <Spin
                 tip="Загрузка сообщений..."

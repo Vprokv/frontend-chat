@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {dialogsActions} from "../redux/actions";
 import socket from "../core/socket";
 
-import {Dialogs as BaseDialogs} from "../../Auth/components/components";
+import {Dialogs as BaseDialogs} from "./components";
 
 const Dialogs = ({
                      fetchDialogs,

@@ -17,6 +17,7 @@ const App = props => {
                     component={Auth} />
                 <Route
                     path={["/", "/dialog:id"]}
+                    render={() => (  <Home /> )}
                     render={() => ( isAuth ? <Home /> : <Redirect to="/signIn" />)}
                 />
             </Switch>
@@ -25,3 +26,26 @@ const App = props => {
 };
 
 export default connect(({ user }) => ({ isAuth: user.isAuth }))(App);
+
+// export default connect(({ user }) => ({ isAuth: user.isAuth }))(App);
+//
+// const App = props => {
+//     const { isAuth } = props;
+//     return (
+//         <div className="wrapper">
+//             <Switch>
+//                 <Route
+//                     exact
+//                     path={["/signIn", "/signUp", "/signUp/verify"]}
+//                     component={Auth} />
+//                 <Route
+//                     path={["/", "/dialog:id"]}
+//                     render={() => (  <Home /> )}
+//                     render={() => ( isAuth ? <Home /> : <Redirect to="/signIn" />)}
+//                 />
+//             </Switch>
+//         </div>
+//     );
+// };
+//
+// export default connect(({ user }) => ({ isAuth: user.isAuth }))(App);

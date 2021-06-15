@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from "classnames";
-import {IconReaded, Avatar} from "../../../../Auth/components/components";
+import {IconReaded, Avatar} from "../../components";
 import {Link} from 'react-router-dom'
 import PropTypes from "prop-types"
 
@@ -42,7 +42,10 @@ const DialogItem = ({
                 onClick={onSelect.bind(this, _id)}
             >
                 <div className="dialogs__item-avatar">
-                    <Avatar user={lastMessage.user} partner={partner} />
+                    <Avatar
+                        user={lastMessage.user}
+                        partner={partner}
+                    />
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">

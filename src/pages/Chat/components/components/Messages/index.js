@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Empty, Spin} from "antd";
-import classNames from "classnames";
+
 import './Messages.scss';
 
 import {Message} from "../index";

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Input} from "antd";
+import {Form} from "antd";
 import {UserOutlined, LockOutlined,MailOutlined,InfoCircleTwoTone } from '@ant-design/icons';
 import {Button, Block, FormField} from "../../components";
 import {Link} from 'react-router-dom';

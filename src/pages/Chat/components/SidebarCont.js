@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {dialogsApi, userApi} from "../utils/api";
 
-import {Sidebar} from "../../Chat/components/components"
+import {Sidebar} from "./components/"
 
 
 const SidebarCont = ({user}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect } from 'react-redux'
 
-import {ChatInput as ChatInputBase} from "../../Auth/components/components";
+import {ChatInput as ChatInputBase} from "./components";
 import {messagesActions} from "../redux/actions";
 
 const ChatInput = ({fetchSendMessage, dialogs}) => {

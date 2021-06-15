@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import './Message.scss';
 import classNames from 'classnames';
 
-import {convertCurrentTime} from "../../utils/helpers"
+import {convertCurrentTime} from "../../../utils/helpers"
 
-import waveSvg from '../../assets/img/wave.svg';
-import pauseSvg from '../../assets/img/pause.svg';
-import playSvg from '../../assets/img/play.svg';
+import waveSvg from '../../../assets/img/wave.svg';
+import pauseSvg from '../../../assets/img/pause.svg';
+import playSvg from '../../../assets/img/play.svg';
 import {Popover, Button} from "antd";
 
 import {Time, IconReaded, Avatar} from "../"

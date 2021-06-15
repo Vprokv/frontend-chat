@@ -3,7 +3,7 @@ import {Form, Input} from "antd";
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 import {Button, Block} from "../../components";
 import {Link} from 'react-router-dom';
-import {validateField} from "../../../../Chat/utils/helpers"
+import {validateField} from "../../../utils/helpers"
 
 
 const LoginForm = props =>{

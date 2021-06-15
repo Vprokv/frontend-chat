@@ -29,7 +29,7 @@ const Dialogs = ({
             fetchMessages(currentDialogId);
         }
 
-        socket.on("SERVER:NEW_MESSAGE", onNewMessage);
+        // socket.on("SERVER:NEW_MESSAGE", onNewMessage);
 
         return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
     }, [currentDialogId]);

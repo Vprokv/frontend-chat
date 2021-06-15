@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Avatar.scss';
-import {generateAvatarFromHash} from "../../utils/helpers";
+import {generateAvatarFromHash} from "../../../utils/helpers";
 
 
 
-const Avatar = ({user, partner, isMe}) => {
+const Avatar = ({user}) => {
+    console.log(user)
     if (user.avatar) {
         return (
             <img
@@ -30,15 +31,15 @@ const Avatar = ({user, partner, isMe}) => {
 };
 
 Avatar.defaultProps = {
-    partner: {},
-    isMe: PropTypes.bool.isRequired
-
-
-};
-
-Avatar.propTypes = {
-    className: PropTypes.string,
+    user: {
+        fullName:PropTypes.string,
+        _id:PropTypes.string,
+        avatar: {},
+        isOnline: true
+    },
 
 };
+
+
 
 export default Avatar;

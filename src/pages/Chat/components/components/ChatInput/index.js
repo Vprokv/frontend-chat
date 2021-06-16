@@ -10,7 +10,7 @@ import './ChatInput.scss';
 const ChatInput = props => {
     const [value, setValue] = useState("");
     const [emojiPickerVisible, setShowEmojiPicker] = useState("");
-    const {onSendMessage, currentDialogId} = props;
+    const {onSendMessage, currentDialog} = props;
 
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!emojiPickerVisible);
@@ -20,7 +20,7 @@ const ChatInput = props => {
     const handleSendMessage = (e) => {
         if (e.keyCode === 13) {
 
-            onSendMessage(value, currentDialogId)
+            onSendMessage(value, currentDialog)
             setValue('');
         }
     }

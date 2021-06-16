@@ -6,6 +6,7 @@ const Socket = ({
                     fetchDialogs,
                     setSocketConnectedStatus,
                     items,
+                    currentDialog,
                     onSocketConnectedStatus
                 }) => {
 
@@ -19,25 +20,25 @@ const Socket = ({
 
 
     // useEffect(() => {
-    //     if (currentDialogId) {
+    //     if (currentDialog) {
     //
-    //         fetchMessages(currentDialogId);
+    //         fetchMessages(currentDialog);
     //     }
     //
     //     socket.on("SERVER:NEW_MESSAGE", onNewMessage);
     //
     //     return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
-    // }, [currentDialogId]);
+    // }, [currentDialog]);
     //
     // useEffect(() => {
     //     messagesRef.current.scrollTo(0, 999999);
     // }, [items]);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         onSocketConnectedStatus(true)
     }, [onSocketConnectedStatus])
-return null
+    return null
 
 };
 

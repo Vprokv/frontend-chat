@@ -111,7 +111,7 @@ export function getDialog() {
                 _id: "60a77496b2278021d0c8f00f2",
                 fullName: "partner1",
                 avatar: null,
-                isOnline: true
+                isOnline: false
             },
             createdAt: "2021-06-03T10:17:38.245Z",
             updatedAt: "2021-06-03T12:16:01.431Z",

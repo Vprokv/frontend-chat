@@ -3,24 +3,27 @@ import {connect } from 'react-redux'
 
 import {ChatInput as ChatInputBase} from "./components";
 import {messagesActions} from "../redux/actions";
+import PropTypes from "prop-types";
 
-const ChatInput = ({fetchSendMessage, dialogs}) => {
+const ChatInput = ({fetchSendMessage, currentDialog}) => {
 
     return (
             <ChatInputBase
                 onSendMessage={fetchSendMessage}
-                currentDialogId={dialogs.currentDialogId}
+                currentDialogId={currentDialog}
             />
         )
 };
 
 ChatInput.defaultProps = {
-    dialogs :{}
+    currentDialog :PropTypes.string,
 };
 
-export default connect(
-    ({dialogs}) => ({
-        dialogs
-    }),
-    messagesActions
-)(ChatInput);
+export default ChatInput;
+
+// export default connect(
+//     ({dialogs}) => ({
+//         dialogs
+//     }),
+//     messagesActions
+// )(ChatInput);

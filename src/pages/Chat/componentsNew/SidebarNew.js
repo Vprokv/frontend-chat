@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Form, Modal, Select} from "antd";
 import {FormOutlined, TeamOutlined} from "@ant-design/icons";
 import DialogsNew from "./Dialogs/DialogsNew";
+import MessagesNew from "./Message/MessagesNew";
 
 
 const SidebarNew = ({
@@ -10,6 +11,23 @@ const SidebarNew = ({
                         currentDialog,
                         setCurrentDialog
 }) => {
+    const [visible, setVisible] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const [messageText, setMessageText] = useState("");
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState(false);
+
+
+
+    const onClose = () => {
+        setVisible(false);
+    };
+
+    const onShow = () => {
+        setVisible(true)
+    };
+
 
     return (
         <div className="chat__sidebar">
@@ -23,6 +41,7 @@ const SidebarNew = ({
                     <span>Список диалогов</span>
                 </div>
                 <Button
+                    onClick={onShow}
                     type="link"
                     icon={<FormOutlined/>}
                 />
@@ -46,7 +65,7 @@ const SidebarNew = ({
                     footer={[
                         <Button
                             key="back"
-
+                            onClick={onClose}
                         >
                             Закрыть
                         </Button>,
@@ -81,5 +100,13 @@ const SidebarNew = ({
         </div>
     );
 };
+
+SidebarNew.defaultProps = {
+    dialogs: {},
+    dialogsMeta: {},
+    currentDialog: "",
+    setCurrentDialog : ""
+}
+
 
 export default SidebarNew;

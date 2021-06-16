@@ -6,20 +6,20 @@ import {getDialog, getDialogMeta, getMessages} from "./api"
 
 
 import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
+import {ChatInput }from "../Chat/components/index"
 
 import {EllipsisOutlined} from '@ant-design/icons';
 
 
 import "./Chat.scss";
+import {Empty} from "antd";
 
 
 const Chat = () => {
     const [isSocketConnected, setSocketConnectedStatus] = useState(false)
     const [messages, setMessages] = useState({})
-
     const [dialogs, setDialogs] = useState([])
     const [dialogsMeta, setDialogsMeta] = useState({})
-
     const [currentDialog, setCurrentDialog] = useState("")
 
 
@@ -49,9 +49,6 @@ const Chat = () => {
     }, [isSocketConnected])
 
 
-
-
-
     return (
     <section className="home chat">
             <SidebarNew
@@ -59,29 +56,38 @@ const Chat = () => {
                 dialogsMeta={dialogsMeta}
                 currentDialog={currentDialog}
                 setCurrentDialog={setCurrentDialog}
-
             />
-            {/*<div className="chat__dialog">*/}
-            {/*    <div className="chat__dialog-header">*/}
-            {/*        <br/>*/}
-                    {/*<HeaderNew*/}
-                    {/*    online*/}
-                    {/*/>*/}
-                {/*    <EllipsisOutlined style={{fontSize: "22px"}}/>*/}
-                {/*</div>*/}
-                <MessagesNew
-                    className="chat__dialog-messages"
-                    messages={messages[currentDialog]}
-                    currentDialog={currentDialog}
+            <div className="chat__dialog">
+                <div className="chat__dialog-header">
+                    <br/>
+                    <HeaderNew
+                        dialogs={dialogs}
+                        currentDialog={currentDialog}
                     />
-            {/*        <ChatInput*/}
-            {/*            className="chat__dialog-input"*/}
-            {/*        />*/}
+                    <EllipsisOutlined style={{fontSize: "22px"}}/>
+                </div>
+
+                {!currentDialog ?
+                    <Empty description="Откройте диалог"/> :
+                    <>
+                        <div className="chat__dialog-messages">
+                            <MessagesNew
+
+                                messages={messages[currentDialog]}
+                            />
+                        </div>
+
+
+                        <ChatInput
+                            currentDialog={currentDialog}
+                        />
+                    </>
+                }
                 <Socket
+                    currentDialog={currentDialog}
                     onSocketConnectedStatus={setSocketConnectedStatus}
                 />
-            {/*    <Meta/>*/}
-            {/*</div>*/}
+            </div>
     </section>
 )};
 

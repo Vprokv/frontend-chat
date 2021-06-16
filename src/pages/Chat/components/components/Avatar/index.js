@@ -6,7 +6,6 @@ import {generateAvatarFromHash} from "../../../utils/helpers";
 
 
 const Avatar = ({user}) => {
-    console.log(user)
     if (user.avatar) {
         return (
             <img
@@ -33,11 +32,8 @@ const Avatar = ({user}) => {
 Avatar.defaultProps = {
     user: {
         fullName:PropTypes.string,
-        _id:PropTypes.string,
         avatar: {},
-        isOnline: true
     },
-
 };
 
 

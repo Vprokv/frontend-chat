@@ -20,7 +20,7 @@ const renderTextInfo = ({hash, verified}) => {
     } else {
         return {
             status: "success",
-            message: "Cсылка с подтверждением аккаунта отправлена на E-mail"
+            message: "Перейдите на страницу авторизации"
         };
     }
 };

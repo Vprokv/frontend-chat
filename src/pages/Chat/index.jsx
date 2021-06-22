@@ -1,18 +1,12 @@
-import React, {useEffect, useState} from 'react';
-
-
-
-import {getDialog, getDialogMeta, getMessages} from "./api"
-
-
-import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
-import {ChatInput }from "../Chat/components/index"
-
-import {EllipsisOutlined} from '@ant-design/icons';
-
-
-import "./Chat.scss";
+import React, {useCallback, useEffect, useState} from 'react';
 import {Empty} from "antd";
+
+import {getDialog, getDialogMeta, getMessages} from "./apiFake"
+// import {Api} from "./utils/api"
+import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
+
+import {ChatInput }from "../Chat/components/index"
+import "./Chat.scss";
 
 
 const Chat = () => {
@@ -22,6 +16,34 @@ const Chat = () => {
     const [dialogsMeta, setDialogsMeta] = useState({})
     const [currentDialog, setCurrentDialog] = useState("")
 
+    const onNewMessage = useCallback(({message, dialogId}) => {
+        setMessages((prevMessages) => ({
+            ...prevMessages,
+            [dialogId]: [...prevMessages[dialogId], message]
+        }))
+    }, [])
+
+    const onRemoveMessage = useCallback(({messageId, dialogId}) => {
+        setMessages((prevMessages) => ({
+            ...prevMessages,
+            [dialogId]: [...prevMessages[dialogId]]
+                .splice(
+                    prevMessages[dialogId].findIndex(({_id})=>messageId===_id),
+                    1
+                )
+        }))
+    }, [])
+
+
+    const onNewDialog = useCallback(({dialog}) => {
+        setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
+
+    const onRemoveDialog = useCallback(({ dialogId}) => {
+        setDialogs((prevDialogs) => [...prevDialogs]
+                .splice(
+                    prevDialogs.findIndex(({_id})=>dialogId===_id),
+                    1)
+        )}, [])
 
 
     useEffect(() => {
@@ -33,12 +55,12 @@ const Chat = () => {
     }, [isSocketConnected])
 
     useEffect(() => {
-        if (currentDialog) {
+        if (currentDialog && !messages[currentDialog]) {
             (async () => {
                 setMessages(await getMessages())
             }) ()
         }
-    }, [currentDialog])
+    }, [currentDialog, messages])
 
     useEffect(() => {
         if (isSocketConnected) {
@@ -59,33 +81,32 @@ const Chat = () => {
             />
             <div className="chat__dialog">
                 <div className="chat__dialog-header">
-                    <br/>
                     <HeaderNew
                         dialogs={dialogs}
                         currentDialog={currentDialog}
                     />
-                    <EllipsisOutlined style={{fontSize: "22px"}}/>
                 </div>
-
                 {!currentDialog ?
                     <Empty description="Откройте диалог"/> :
                     <>
                         <div className="chat__dialog-messages">
                             <MessagesNew
-
                                 messages={messages[currentDialog]}
                             />
                         </div>
-
-
                         <ChatInput
                             currentDialog={currentDialog}
+                            onNewMessage={onNewMessage}
                         />
                     </>
                 }
                 <Socket
                     currentDialog={currentDialog}
                     onSocketConnectedStatus={setSocketConnectedStatus}
+                    onNewMessage={onNewMessage}
+                    onRemoveMessage={onRemoveMessage}
+                    onNewDialog={onNewDialog}
+                    onRemoveDialog={onRemoveDialog}
                 />
             </div>
     </section>

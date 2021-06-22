@@ -1,4 +1,4 @@
-import {dialogsApi} from "../../utils/api";
+import {Api} from "../../utils/api";
 
 
 const Actions = {
@@ -13,7 +13,7 @@ const Actions = {
     }),
     fetchDialogs: () => dispatch => {
 
-        dialogsApi.getAll().then(({data}) => {
+        Api.getAll().then(({data}) => {
             dispatch(Actions.setDialogs(data));
         });
 

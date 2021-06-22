@@ -6,21 +6,24 @@ import { UploadField } from '@navjobs/upload'
 import { Picker } from 'emoji-mart'
 
 import './ChatInput.scss';
+import {messagesApi} from "../../utils/api";
 
 const ChatInput = props => {
     const [value, setValue] = useState("");
     const [emojiPickerVisible, setShowEmojiPicker] = useState("");
-    const {onSendMessage, currentDialog} = props;
+    const {currentDialog} = props;
 
     const toggleEmojiPicker = () => {
         setShowEmojiPicker(!emojiPickerVisible);
     };
 
 
+
     const handleSendMessage = (e) => {
         if (e.keyCode === 13) {
-
-            // onSendMessage(value, currentDialog)
+            messagesApi
+                .send(value, currentDialog)
+                .then(()=> null)
             setValue('');
         }
     }
@@ -31,8 +34,8 @@ const ChatInput = props => {
             <div className="chat-input__smile-btn">
                 {emojiPickerVisible &&(
                     <div className="chat-input__emoji-picker">
-                    <Picker
-                        set='apple'/>
+                        <Picker
+                            set='apple'/>
                     </div>
                 )}
 
@@ -69,8 +72,8 @@ const ChatInput = props => {
 
                 {value ? (
                     <Button type="link" icon={<SendOutlined/>}/>
-                    ) : (
-                        <Button type="link" icon={<AudioOutlined/>} />
+                ) : (
+                    <Button type="link" icon={<AudioOutlined/>} />
                 )}
             </div>
         </div>

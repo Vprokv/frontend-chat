@@ -1,15 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
-
-import './MessageNew.scss';
-// import classNames from 'classnames';
-//
-// import {convertCurrentTime} from "../../../utils/helpers"
-
+import {connect} from "react-redux";
 import {Popover, Button, Spin, Empty} from "antd";
-//
-import {Time, IconReaded, Avatar, } from "../../components/components"
 import {EllipsisOutlined} from "@ant-design/icons";
+
+import {Time, Avatar } from "../../components/components"
+import './MessageNew.scss';
+import {Api} from "../../utils/api";
+
 
 
 
@@ -45,97 +43,110 @@ import {EllipsisOutlined} from "@ant-design/icons";
 
 const MessagesNew = ({
                          messages,
+                         user,
+                     }) => {
 
-                     // isReaded,
-                     // isTyping,
-                     // onRemoveMessage
-                 }) => {
+    const isMe = () => (messages.author._id === user._id ? isMe : "")
 
-    const isMe = () =>{
-//     if (messages.author._id === user._id) {
-        return true
-//     } else {
-//         return false
-//     }
-}
+    const messagesRef = useRef(null);
+    //повесить реф на эл0т который скроллит
 
 
-    if (!messages && !messages._id) {
-        return <Empty description="Диалог пуст"/>
-    } else  return (
+    useEffect(() => {
+        messagesRef.current.scrollTo(0, 999999);
+    }, [messages]);
 
+    const removeMessageById = (messageId) =>  {
+            if (window.confirm("Вы действительно хотите удалить сообщение")) {
+                Api
+                    .removeMessageById(messageId)
+                    .then(({data}) => {
+                        dispatch({
+                            type: "MESSAGES:REMOVE_MESSAGE",
+                            payload: id
+                        });
+                    })
+                    .catch(() => {
+                        // dispatch(Actions.setIsLoading(false));
+                    });
+            }
+        }
+
+    return (
         <div
-            //     className={classNames("message", {
-            //         "message--isme": isMe==="true",
-            //         "message--is-typing": isTyping,
-            //     })}
+            ref={messagesRef}
+            className={isMe ? "message-is-me" : "message"}
         >
             {messages.map((message) => (
                 <div className="message__content">
-                    {/*<IconReaded*/}
-                    {/*    isMe={isMe}*/}
-                    {/*    // isReaded={isReaded}*/}
-                    {/*/>*/}
-                    {/*<Popover*/}
-                    {/*    content={*/}
-                    {/*        <div>*/}
-                    {/*            <Button onClick={onRemoveMessage}>Удалить сообщение</Button>*/}
-                    {/*        </div>*/}
-                    {/*    }>*/}
-                    <div className="message__icon-actions">
-                        <Button>
-                            <EllipsisOutlined style={{fontSize: "18px"}}/>
-                        </Button>
+                    {messages && !message._id ?
+                        <Empty description="Диалог пуст. Отправьте первое сообщение"/>
+                        : (
+                            <>
+                                <Popover
+                                    content={
+                                        <div>
+                                            <Button
+                                                onClick={removeMessageById}>
+                                                Удалить сообщение
+                                            </Button>
+                                        </div>
+                                    }>
+                                    <div className="message__icon-actions">
+                                        <Button >
+                                            <EllipsisOutlined style={{fontSize: "18px"}}/>
+                                        </Button>
+                                    </div>
 
-                    </div>
-
-                    {/*</Popover>*/}
-                    <div className="message__avatar">
-                        <Avatar user={message.author}/>
-
-                    </div>
-                    <div className="message__info">
-                        <div className="message__bubble">
-                            {message.text &&
-                            <p className="message__text">{message.text}</p>
-                            }
-                            {/*                {isTyping && (*/}
-                            {/*                    <div className="message__typing">*/}
-                            {/*                        <span />*/}
-                            {/*                        <span />*/}
-                            {/*                        <span />*/}
-                            {/*                    </div>*/}
-                            {/*                )}*/}
-                            {/*                />}*/}
-                        </div>
-                        {message.createdAt && (
-                            <span className="message__date">
-                              <Time date={message.createdAt} />
+                                </Popover>
+                                <div className="message__avatar">
+                                    <Avatar user={message.author}/>
+                                </div>
+                                <div className="message__info">
+                                    <div className="message__bubble">
+                                        {message.text &&
+                                        <p className="message__text">{message.text}</p>
+                                        }
+                                        {/*                {isTyping && (*/}
+                                        {/*                    <div className="message__typing">*/}
+                                        {/*                        <span />*/}
+                                        {/*                        <span />*/}
+                                        {/*                        <span />*/}
+                                        {/*                    </div>*/}
+                                        {/*                )}*/}
+                                        {/*                />}*/}
+                                    </div>
+                                    {message.createdAt && (
+                                        <span className="message__date">
+                              <Time date={message.createdAt}/>
                             </span>
-                        )}
-                    </div>
+                                    )}
+                                </div>
+                            </>)}
                 </div>
             ))
             }
         </div>
 
-    )}
+    )
+}
 
 MessagesNew.propTypes = {
     messages: PropTypes.arrayOf(PropTypes.shape(
         {
-            text:PropTypes.string,
+            text: PropTypes.string,
             author: {
-                fullName:PropTypes.string,
-                _id:PropTypes.string,
+                fullName: PropTypes.string,
+                _id: PropTypes.string,
             }
         }
     ))
 };
-    
+
 MessagesNew.defaultProps = {
-    messages:[]
+    messages: []
 };
 
+export default connect(
+    ({user}) => ({user: user.data}))(MessagesNew);
 
-export default MessagesNew;

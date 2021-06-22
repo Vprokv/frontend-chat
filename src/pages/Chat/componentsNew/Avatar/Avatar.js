@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Avatar.scss';
-import {generateAvatarFromHash} from "../../../utils/helpers";
+import {generateAvatarFromHash} from "../../utils/helpers";
 
 
 

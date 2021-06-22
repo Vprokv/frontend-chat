@@ -1,5 +1,5 @@
 import openNotification from "../../utils/helpers/openNotification";
-import {userApi} from "../../utils/api";
+import {Api} from "../../utils/api";
 
 const Actions = {
     setUserData: data => ({
@@ -11,7 +11,7 @@ const Actions = {
         payload: bool
     }),
     fetchUserData: () => dispatch => {
-        userApi.getMe().then(({ data }) => {
+        Api.getMe().then(({ data }) => {
             dispatch(Actions.setUserData(data));
         }).catch(err =>{
             if (err.response.status === 403) {
@@ -21,7 +21,7 @@ const Actions = {
         });
     },
     fetchUserLogin: postData => dispatch => {
-        return userApi
+        return Api
             .signIn(postData)
             .then(({data}) => {
                 const {token} = data;
@@ -47,7 +47,7 @@ const Actions = {
             });
     },
     fetchUserRegister: postData => dispatch => {
-        return userApi.signUp(postData).then(({data}) => {
+        return Api.signUp(postData).then(({data}) => {
             return data;
         });
     }

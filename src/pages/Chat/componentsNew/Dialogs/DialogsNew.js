@@ -1,12 +1,7 @@
-import React, {useMemo} from 'react';
-import orderBy from "lodash/orderBy";
-import {Avatar, DialogItem, IconReaded} from "../../components/components";
-import {Empty} from "antd";
+import React from 'react';
+import {Avatar} from "../../components/components";
 import classNames from "classnames";
 import {Link} from "react-router-dom";
-import isToday from "date-fns/isToday";
-import format from "date-fns/format";
-import ruLocale from "date-fns/locale/ru";
 import PropTypes from "prop-types";
 import './DialogsNew.scss';
 import MessageTime from "./getMessageTime"

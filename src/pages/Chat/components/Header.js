@@ -1,5 +1,5 @@
 import React from 'react';
-import {Status as StatusBase} from "../../Chat/components/components";
+// import {Status as StatusBase} from "../../Chat/components/components";
 import {connect } from 'react-redux'
 
 
@@ -27,12 +27,12 @@ const ChatInputCont = ({currentDialogId, user, dialogs}) => {
     }
 
 
-    return (<StatusBase
-        online={partner.isOnline}
-        fullName={partner.fullName}
-    />
+    // return (<StatusBase
+    //     online={partner.isOnline}
+    //     fullName={partner.fullName}
+    // />
 
-    )
+    // )
 
 };
 

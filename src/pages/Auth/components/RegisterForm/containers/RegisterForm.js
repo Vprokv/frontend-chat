@@ -20,18 +20,16 @@ export default withFormik({
 
         return errors;
     },
-    handleSubmit: (values, {setSubmitting, props}) => {
-        store.dispatch(userActions.fetchUserRegister(values)).then(({status}) => {
-            if (status === "success") {
-                setTimeout(() => {
-                    props.history.push("/");
-                }, 50);
-            }
-            setSubmitting(false);
-        })
-            .catch(() => {
-
-            });
+    handleSubmit: async function a (values, { setSubmitting, props }) {
+        const result = await userActions.fetchUserRegister(values)
+        if (result.status === "success") {
+            setTimeout(() => {
+                props.history.push("/signUp/verify");
+            }, 50);
+        }
+        setSubmitting(false);
+        store.dispatch(result)
     },
     displayName: "RegisterForm"
 })(RegisterForm);
+

@@ -7,7 +7,7 @@ import PropTypes from "prop-types"
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
 import ruLocale from 'date-fns/locale/ru';
-// import {addDays} from 'date-fns'
+
 
 
 const getMessageTime = (created_at) => {

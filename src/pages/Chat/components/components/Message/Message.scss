@@ -76,19 +76,19 @@
       }
     }
 
-    &-actions{
-      display: none;
-      transform: rotate(90deg);
-      position: absolute;
-      left: -25px;
-      top: -5px;
-      cursor: pointer;
-      .ant-btn-link{
-        box-shadow: none;
-        color: #202020 !important;
-      }
-
-    }
+    //&-actions{
+    //  display: none;
+    //  transform: rotate(90deg);
+    //  position: absolute;
+    //  left: -25px;
+    //  top: -5px;
+    //  cursor: pointer;
+    //  .ant-btn-link{
+    //    box-shadow: none;
+    //    color: #202020 !important;
+    //  }
+    //
+    //}
   }
 
   &--is-audio {

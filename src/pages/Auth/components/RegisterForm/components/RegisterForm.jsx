@@ -3,6 +3,7 @@ import {Form} from "antd";
 import {UserOutlined, LockOutlined,MailOutlined,InfoCircleTwoTone } from '@ant-design/icons';
 import {Button, Block, FormField} from "../../components";
 import {Link} from 'react-router-dom';
+
 const success = false;
 
 const RegisterForm = props => {
@@ -17,6 +18,7 @@ const RegisterForm = props => {
             isSubmitting
     }
 = props;
+
            return (
             <>
                     <div className="auth__top">

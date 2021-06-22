@@ -17,18 +17,32 @@
       padding: 20px;
       align-items: center;
 
-
-
-
-
       &>div{
         i{
           display: inline-block;
           margin-right: 5px;
         }
       }
+
+
     }
 
+    .dialogs__search{
+      padding: 2px 20px 20px 20px;
+      .ant-input {
+        background-color: #f7f8f9;
+        border: 0;
+        height: 38px;
+        padding: 4px 11px 6px;
+      }
+      .ant-btn{
+        background-color: #f7f8f9;
+        border: 0;
+        box-shadow: 0 0 0 ;
+        height: 38px;
+
+      }
+    }
 
     &-dialogs {
       height: calc(100% - 136px);
@@ -59,7 +73,7 @@
 
     &-header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 21px;
       height: 58px;
@@ -69,6 +83,46 @@
       &-center {
         text-align: center;
 
+        .button{
+          position: absolute;
+          transform: rotate(90deg);
+          top: 15px;
+          right: 0;
+
+        }
+        .status {
+          display: inline-block;
+          color: #bfbfbf;
+          position: relative;
+
+          &::before {
+            display: block;
+            position: absolute;
+            top: 6px;
+            left: -10px;
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 30px;
+            background-color: #D3d3d3;
+          }
+
+          &--online {
+            display: inline-block;
+            position: relative;
+            &::before {
+              display: block;
+              position: absolute;
+              top: 6px;
+              left: -10px;
+              content: '';
+              width: 6px;
+              height: 6px;
+              border-radius: 30px;
+              background-color: #00C980;
+            }
+          }
+        }
       }
 
       &-username {
@@ -77,6 +131,12 @@
         margin-bottom: 5px;
 
       }
+
+
+      &-status{
+        justify-content: center;
+      }
+
     }
 
 

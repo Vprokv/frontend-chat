@@ -18,29 +18,16 @@ const LoginFormContainer = withFormik({
         validateForm({isAuth: true, values, errors});
         return errors;
     },
-    handleSubmit: (values, { setSubmitting, props }) => {
-        store
-            .dispatch(userActions.fetchUserLogin(values))
-            .then(({status}) => {
-                if (status === "success") {
-                    props.history.push("/");
-                }
-                setSubmitting(false);
-            }).catch(()=>{
-            setSubmitting(false);
-        });
+    handleSubmit: async function a (values, { setSubmitting, props }) {
+        const result = await userActions.fetchUserLogin(values)
+        if (result.status === "success") {
+            setTimeout(() => {
+                props.history.push("/");
+            }, 50);
+        }
+        setSubmitting(false);
+        store.dispatch(result)
     },
-
-    // async a (values, { setSubmitting, props }) {
-    //     const result = await userActions.fetchUserLogin(values)
-    //     if (result.status === "success") {
-    //         setTimeout(() => {
-    //             props.history.push("/");
-    //         }, 50);
-    //     }
-    //     setSubmitting(false);
-    //     store.dispatch(result)
-    // },
 
     displayName: "LoginForm"
 })(LoginForm);

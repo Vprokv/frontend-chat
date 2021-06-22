@@ -1,43 +1,38 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import socket from "../core/socket";
 
 
 const Socket = ({
-                    fetchDialogs,
+                    onNewMessage,
+                    onRemoveMessage,
+                    onNewDialog,
+                    onRemoveDialog,
                     setSocketConnectedStatus,
-                    items,
-                    currentDialog,
+
                     onSocketConnectedStatus
                 }) => {
 
-    // useEffect(() => {
-    //
-    //
-    //     socket.on("SERVER:DIALOG_CREATED", onNewDialog);
-    //     return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog);
-    // }, []);
-
-
-
-    // useEffect(() => {
-    //     if (currentDialog) {
-    //
-    //         fetchMessages(currentDialog);
-    //     }
-    //
-    //     socket.on("SERVER:NEW_MESSAGE", onNewMessage);
-    //
-    //     return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
-    // }, [currentDialog]);
-    //
-    // useEffect(() => {
-    //     messagesRef.current.scrollTo(0, 999999);
-    // }, [items]);
-
 
     useEffect(() => {
+        socket.on("SERVER:DIALOG_CREATED", onNewDialog);
+        return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog)
+
+        socket.on("SERVER:DIALOG_DELETED", onRemoveDialog);
+        return () => socket.removeListener("SERVER:DIALOG_DELETED", onRemoveDialog);
+
+        socket.on("SERVER:NEW_MESSAGE", onNewMessage);
+        return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
+
+        socket.on("SERVER:MESSAGE_DELETED", onRemoveMessage);
+        return () => socket.removeListener("SERVER:MESSAGE_DELETED", onRemoveMessage);
+
         onSocketConnectedStatus(true)
-    }, [onSocketConnectedStatus])
+
+        return () => {
+            onSocketConnectedStatus(false)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return null
 
 };

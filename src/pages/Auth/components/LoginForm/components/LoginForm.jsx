@@ -1,9 +1,13 @@
 import React from 'react';
-import {Form, Input} from "antd";
+import {Form} from "antd";
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
-import {Button, Block} from "../../components";
+import {Button, Block, FormField} from "../../components";
 import {Link} from 'react-router-dom';
-import {validateField} from "../../../utils/helpers"
+import {withFormik} from "formik";
+import validateForm from "../../../utils/validate";
+import {userActions} from "../../../../Chat/redux/actions";
+import store from "../../../../Chat/redux/store";
+
 
 
 const LoginForm = props =>{
@@ -19,6 +23,32 @@ const LoginForm = props =>{
 
 }
 = props;
+
+    // const LoginFormContainer = withFormik({
+    //     enableReinitialize: true,
+    //     mapPropsToValues: () => ({
+    //         email: "",
+    //         password: ""
+    //     }),
+    //     validate: values => {
+    //         let errors = {};
+    //         validateForm({isAuth: true, values, errors});
+    //         return errors;
+    //     },
+    //     handleSubmit: async function a (values, { setSubmitting, props }) {
+    //         const result = await userActions.fetchUserLogin(values)
+    //         if (result.status === "success") {
+    //             setTimeout(() => {
+    //                 props.history.push("/");
+    //             }, 50);
+    //         }
+    //         setSubmitting(false);
+    //         store.dispatch(result)
+    //     },
+    //
+    //
+    // });
+
 return (
     <>
         <div className="auth__top">
@@ -31,36 +61,27 @@ return (
         </div>
                 <Block>
             <form onSubmit={handleSubmit} className="login-form">
-                <Form.Item
-                    validateStatus={validateField("email", touched, errors)}
-                    help={!touched.email ? "" : errors.email}
-                    hasFeedback>
-                    <Input
-                        id="email"
-                        prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
-                        size="large"
-                        placeholder="E-Mail"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                </Form.Item>
-                <Form.Item
-                    validateStatus={validateField('password', touched, errors)}
-                    help={!touched.password ? "" : errors.password }
-                    hasFeedback>
-                    <Input
-                        id="password"
-                        prefix={<LockOutlined  style={{color: "rgba(0,0,0,.25)"}}/>}
-                        type="password"
-                        size="large"
+                <FormField
+                    name="email"
+                    prefix={<MailOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
+                    placeholder="E-mail"
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    touched={touched}
+                    errors={errors}
+                    values={values}
+                />
+                    <FormField
+                        name="password"
+                        prefix={<LockOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
                         placeholder="Пароль"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-
+                        handleChange={handleChange}
+                        handleBlur={handleBlur}
+                        touched={touched}
+                        errors={errors}
+                        values={values}
+                        type="password"
                     />
-                </Form.Item>
                 <Form.Item>
                     {isSubmitting && !isValid && <span> Ошибка!</span>}
                     <Button

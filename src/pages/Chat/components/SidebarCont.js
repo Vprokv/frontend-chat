@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
-import {dialogsApi, userApi} from "../utils/api";
+import {Api} from "../utils/api";
 
 import {Sidebar} from "./components/"
 
@@ -24,7 +24,7 @@ const SidebarCont = ({user}) => {
 
     const onSearch = (value) => {
         setIsLoading(true);
-        userApi
+        Api
             .findUsers(value)
             .then(({data}) => {
                 setUsers(data);
@@ -35,7 +35,7 @@ const SidebarCont = ({user}) => {
     };
 
     const onAddDialog = () => {
-        dialogsApi
+        Api
             .create({
                 partner: selectedUserId,
                 text: messageText

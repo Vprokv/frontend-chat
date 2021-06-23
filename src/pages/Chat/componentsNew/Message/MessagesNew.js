@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Popover, Button, Spin, Empty} from "antd";
@@ -6,9 +6,7 @@ import {EllipsisOutlined} from "@ant-design/icons";
 
 import {Time, Avatar } from "../../components/components"
 import './MessageNew.scss';
-import {Api} from "../../utils/api";
-
-
+import {removeMessageById} from "../../Api";
 
 
 // const Messages = ({onRemoveMessage, blockRef, isLoading, items, user, className}) => {
@@ -46,31 +44,22 @@ const MessagesNew = ({
                          user,
                      }) => {
 
-    const isMe = () => (messages.author._id === user._id ? isMe : "")
-
+    const isMe = () => (message.author._id === user._id)
     const messagesRef = useRef(null);
-    //повесить реф на эл0т который скроллит
-
-
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
     }, [messages]);
 
-    const removeMessageById = (messageId) =>  {
-            if (window.confirm("Вы действительно хотите удалить сообщение")) {
-                Api
-                    .removeMessageById(messageId)
-                    .then(({data}) => {
-                        dispatch({
-                            type: "MESSAGES:REMOVE_MESSAGE",
-                            payload: id
-                        });
-                    })
-                    .catch(() => {
-                        // dispatch(Actions.setIsLoading(false));
-                    });
+
+    const RemoveMessage = async (message) => {
+        if (window.confirm("Вы действительно хотите удалить сообщение")) {
+            try {
+                await removeMessageById({messageId: message._id})
+            } catch (e) {
+                console.log("Ошибка при удалении", e.message)
             }
         }
+    }
 
     return (
         <div
@@ -87,7 +76,7 @@ const MessagesNew = ({
                                     content={
                                         <div>
                                             <Button
-                                                onClick={removeMessageById}>
+                                                onClick={RemoveMessage}>
                                                 Удалить сообщение
                                             </Button>
                                         </div>

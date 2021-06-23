@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
 import {EllipsisOutlined} from "@ant-design/icons";
 import {Button, Popover} from "antd";
+import {removeDialogById} from "../../Api";
 
 const HeaderNew = ({
                        dialogs,
@@ -15,10 +16,14 @@ const HeaderNew = ({
     const currentDialogObj = dialogs.filter(dialog => dialog._id === currentDialog)[0];
 
     const online = (currentDialogObj.partner.isOnline === true) ? true : ""
-console.log(online)
 
-    const RemoveDialog = () => {
-        return null
+
+
+    const RemoveDialog = async (dialog) => {
+        if (window.confirm("Вы действительно хотите удалить сообщение")) {
+            await removeDialogById(dialog._id)
+        }
+
     }
 
     return (

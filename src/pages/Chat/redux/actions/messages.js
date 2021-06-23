@@ -1,4 +1,4 @@
-import {messagesApi} from "../../utils/api";
+import {Api} from "../../utils/api";
 
 
 
@@ -22,7 +22,7 @@ const Actions = {
     },
 
     fetchSendMessage: (text, dialogId) => dispatch => {
-        return messagesApi.send(text, dialogId);
+        return Api.send(text, dialogId);
     },
 
     setIsLoading: bool => ({
@@ -30,26 +30,26 @@ const Actions = {
         payload: bool
     }),
 
-    removeMessageById: (id) => dispatch => {
-        if (window.confirm("Вы действительно хотите удалить сообщение")) {
-            messagesApi
-                .removeById(id)
-                .then(({data}) => {
-                    dispatch({
-                        type: "MESSAGES:REMOVE_MESSAGE",
-                        payload: id
-                    });
-                })
-                .catch(() => {
-                    dispatch(Actions.setIsLoading(false));
-                });
-        }
-    },
+    // removeMessageById: (id) => dispatch => {
+    //     if (window.confirm("Вы действительно хотите удалить сообщение")) {
+    //         Api
+    //             .removeMessageById(id)
+    //             .then(({data}) => {
+    //                 dispatch({
+    //                     type: "MESSAGES:REMOVE_MESSAGE",
+    //                     payload: id
+    //                 });
+    //             })
+    //             .catch(() => {
+    //                 dispatch(Actions.setIsLoading(false));
+    //             });
+    //     }
+    // },
 
     fetchMessages: dialogId => dispatch => {
         dispatch(Actions.setIsLoading(true));
-        messagesApi
-            .getAllByDialogId(dialogId)
+        Api
+            .getDialog(dialogId)
             .then(({data}) => {
                 dispatch(Actions.setMessages(data));
             })

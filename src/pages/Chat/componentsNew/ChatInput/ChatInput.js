@@ -6,7 +6,7 @@ import { UploadField } from '@navjobs/upload'
 import { Picker } from 'emoji-mart'
 
 import './ChatInput.scss';
-import {messagesApi} from "../../utils/api";
+import {sendMessage} from "../../Api"
 
 const ChatInput = props => {
     const [value, setValue] = useState("");
@@ -18,12 +18,10 @@ const ChatInput = props => {
     };
 
 
-
-    const handleSendMessage = (e) => {
+    const handleSendMessage = async (e) => {
         if (e.keyCode === 13) {
-            messagesApi
-                .send(value, currentDialog)
-                .then(()=> null)
+            await sendMessage(value, currentDialog)
+
             setValue('');
         }
     }

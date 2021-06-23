@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Empty} from "antd";
 
-import {getDialog, getDialogMeta, getMessages} from "./apiFake"
-// import {Api} from "./utils/api"
+// import {getDialog, getDialogMeta, getMessages} from "./apiFake"
+import {getDialog, getDialogMeta, getMessages} from "./Api"
 import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
 
 import {ChatInput }from "../Chat/components/index"
@@ -34,7 +34,6 @@ const Chat = () => {
         }))
     }, [])
 
-
     const onNewDialog = useCallback(({dialog}) => {
         setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
 
@@ -44,6 +43,14 @@ const Chat = () => {
                     prevDialogs.findIndex(({_id})=>dialogId===_id),
                     1)
         )}, [])
+
+    // const onUpdateMeta = useCallback(({message, dialogId}) => {
+    //     setDialogsMeta((prevMessages) => ({
+    //             ...prevMessages,
+    //             [dialogId]: [...prevMessages[dialogId].splice(0, 1), message],
+    //         })
+    //     )
+    // }, [])
 
 
     useEffect(() => {
@@ -96,7 +103,7 @@ const Chat = () => {
                         </div>
                         <ChatInput
                             currentDialog={currentDialog}
-                            onNewMessage={onNewMessage}
+
                         />
                     </>
                 }
@@ -107,6 +114,7 @@ const Chat = () => {
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
+
                 />
             </div>
     </section>

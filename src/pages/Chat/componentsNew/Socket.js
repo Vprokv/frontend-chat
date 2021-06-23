@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import socket from "../core/socket";
 
 
@@ -7,9 +7,9 @@ const Socket = ({
                     onRemoveMessage,
                     onNewDialog,
                     onRemoveDialog,
-                    setSocketConnectedStatus,
-
-                    onSocketConnectedStatus
+                    onUpdateMeta,
+                    onSocketConnectedStatus,
+                    setSocketConnectedStatus
                 }) => {
 
 
@@ -25,6 +25,7 @@ const Socket = ({
 
         socket.on("SERVER:MESSAGE_DELETED", onRemoveMessage);
         return () => socket.removeListener("SERVER:MESSAGE_DELETED", onRemoveMessage);
+
 
         onSocketConnectedStatus(true)
 

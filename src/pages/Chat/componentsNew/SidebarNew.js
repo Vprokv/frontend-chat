@@ -27,7 +27,6 @@ const SidebarNew = ({
         user => (
             <Option
                 key={user._id}
-
             >
                 {user.fullName}
             </Option>
@@ -56,7 +55,7 @@ const SidebarNew = ({
 
     const onAddDialog = () => {
         Api
-            .create({
+            .createDialog({
                 partner: selectedUserId,
                 text: messageText
             })

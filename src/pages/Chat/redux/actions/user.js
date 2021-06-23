@@ -1,5 +1,5 @@
 import openNotification from "../../utils/helpers/openNotification";
-import {Api} from "../../utils/api";
+import {getMe, signUp, signIn} from "../../Api";
 
 const Actions = {
     setUserData: data => ({
@@ -10,19 +10,20 @@ const Actions = {
         type: "USER:SET_IS_AUTH",
         payload: bool
     }),
-    fetchUserData: () => dispatch => {
-        Api.getMe().then(({ data }) => {
-            dispatch(Actions.setUserData(data));
-        }).catch(err =>{
-            if (err.response.status === 403) {
-                dispatch(Actions.setIsAuth(false))
-                delete window.localStorage.token;
-            }
-        });
+    fetchUserData: () => async dispatch=> {
+       try {
+           dispatch(Actions.setUserData(await getMe()))
+       }
+       catch (err){
+           if (err.response.status === 403) {
+               dispatch(Actions.setIsAuth(false))
+               delete window.localStorage.token;
+           }
+       }
     },
     fetchUserLogin: postData => dispatch => {
-        return Api
-            .signIn(postData)
+        return (
+            signIn(postData)
             .then(({data}) => {
                 const {token} = data;
                 openNotification({
@@ -46,8 +47,9 @@ const Actions = {
                 }
             });
     },
-    fetchUserRegister: postData => dispatch => {
-        return Api.signUp(postData).then(({data}) => {
+    fetchUserRegister: postData => async dispatch => {
+        return signUp(postData)
+            .then(({data}) => {
             return data;
         });
     }

@@ -21,10 +21,10 @@ const Actions = {
            }
        }
     },
-    fetchUserLogin: postData => dispatch => {
-        return (
-            signIn(postData)
-            .then(({data}) => {
+    fetchUserLogin: postData => async dispatch => {
+        try {
+            await signIn(postData)
+            return (({data}) => {
                 const {token} = data;
                 openNotification({
                     title: "Отлично!",
@@ -37,19 +37,20 @@ const Actions = {
                 dispatch(Actions.setIsAuth(true));
                 return data;
             })
-            .catch(({response}) => {
-                if (response.status === 403) {
-                    openNotification({
-                        title: "Ошибка при авторизации",
-                        text: "Неверный логин или пароль",
-                        type: "error"
-                    });
-                }
-            });
+        } catch (e) {
+            if (e.status === 403) {
+                openNotification({
+                    title: "Ошибка при авторизации",
+                    text: "Неверный логин или пароль",
+                    type: "error"
+                });
+            }
+        }
     },
+
     fetchUserRegister: postData => async dispatch => {
-        return signUp(postData)
-            .then(({data}) => {
+        await signUp(postData)
+        return (({data}) => {
             return data;
         });
     }

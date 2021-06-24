@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Empty} from "antd";
 
-// import {getDialog, getDialogMeta, getMessages} from "./apiFake"
 import {getDialog, getDialogMeta, getMessages} from "./Api"
 import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
 
@@ -43,14 +42,6 @@ const Chat = () => {
                     prevDialogs.findIndex(({_id})=>dialogId===_id),
                     1)
         )}, [])
-
-    // const onUpdateMeta = useCallback(({message, dialogId}) => {
-    //     setDialogsMeta((prevMessages) => ({
-    //             ...prevMessages,
-    //             [dialogId]: [...prevMessages[dialogId].splice(0, 1), message],
-    //         })
-    //     )
-    // }, [])
 
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {EllipsisOutlined} from "@ant-design/icons";
@@ -23,7 +23,6 @@ const HeaderNew = ({
         if (window.confirm("Вы действительно хотите удалить сообщение")) {
             await removeDialogById(dialog._id)
         }
-
     }
 
     return (

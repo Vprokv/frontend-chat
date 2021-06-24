@@ -44,7 +44,7 @@ const MessagesNew = ({
                          user,
                      }) => {
 
-    const isMe = () => (message.author._id === user._id)
+
     const messagesRef = useRef(null);
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
@@ -54,9 +54,9 @@ const MessagesNew = ({
     const RemoveMessage = async (message) => {
         if (window.confirm("Вы действительно хотите удалить сообщение")) {
             try {
-                await removeMessageById({messageId: message._id})
+                await removeMessageById(message._id)
             } catch (e) {
-                console.log("Ошибка при удалении", e.message)
+                return "Ошибка при удалении"
             }
         }
     }
@@ -64,55 +64,57 @@ const MessagesNew = ({
     return (
         <div
             ref={messagesRef}
-            className={isMe ? "message-is-me" : "message"}
         >
             {messages.map((message) => (
-                <div className="message__content">
-                    {messages && !message._id ?
-                        <Empty description="Диалог пуст. Отправьте первое сообщение"/>
-                        : (
-                            <>
-                                <Popover
-                                    content={
-                                        <div>
-                                            <Button
-                                                onClick={RemoveMessage}>
-                                                Удалить сообщение
+                <div className={message.author._id === user._id ? "message--is-me" : "message"}>
+                    <div className="message__content">
+                        {messages && !message._id ?
+                            <Empty description="Диалог пуст. Отправьте первое сообщение"/>
+                            : (
+                                <>
+                                    <Popover
+                                        content={
+                                            <div>
+                                                <Button
+                                                    onClick={RemoveMessage}>
+                                                    Удалить сообщение
+                                                </Button>
+                                            </div>
+                                        }>
+                                        <div className="message__icon-actions">
+                                            <Button>
+                                                <EllipsisOutlined style={{fontSize: "18px"}}/>
                                             </Button>
                                         </div>
-                                    }>
-                                    <div className="message__icon-actions">
-                                        <Button >
-                                            <EllipsisOutlined style={{fontSize: "18px"}}/>
-                                        </Button>
-                                    </div>
 
-                                </Popover>
-                                <div className="message__avatar">
-                                    <Avatar user={message.author}/>
-                                </div>
-                                <div className="message__info">
-                                    <div className="message__bubble">
-                                        {message.text &&
-                                        <p className="message__text">{message.text}</p>
-                                        }
-                                        {/*                {isTyping && (*/}
-                                        {/*                    <div className="message__typing">*/}
-                                        {/*                        <span />*/}
-                                        {/*                        <span />*/}
-                                        {/*                        <span />*/}
-                                        {/*                    </div>*/}
-                                        {/*                )}*/}
-                                        {/*                />}*/}
+                                    </Popover>
+                                    <div className="message__avatar">
+                                        <Avatar user={message.author}/>
                                     </div>
-                                    {message.createdAt && (
-                                        <span className="message__date">
+                                    <div className="message__info">
+                                        <div className="message__bubble">
+                                            {message.text &&
+                                            <p className="message__text">{message.text}</p>
+                                            }
+                                            {/*                {isTyping && (*/}
+                                            {/*                    <div className="message__typing">*/}
+                                            {/*                        <span />*/}
+                                            {/*                        <span />*/}
+                                            {/*                        <span />*/}
+                                            {/*                    </div>*/}
+                                            {/*                )}*/}
+                                            {/*                />}*/}
+                                        </div>
+                                        {message.createdAt && (
+                                            <span className="message__date">
                               <Time date={message.createdAt}/>
                             </span>
-                                    )}
-                                </div>
-                            </>)}
+                                        )}
+                                    </div>
+                                </>)}
+                    </div>
                 </div>
+
             ))
             }
         </div>

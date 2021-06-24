@@ -3,7 +3,7 @@ import {Button, Form, Input, Modal, Select} from "antd";
 import {FormOutlined, TeamOutlined} from "@ant-design/icons";
 import DialogsNew from "./Dialogs/DialogsNew";
 
-import {Api} from "../utils/api";
+import {findUsers, createDialog} from "../Api";
 import {connect} from "react-redux";
 
 const {Option} = Select;
@@ -32,6 +32,7 @@ const SidebarNew = ({
             </Option>
         ));
 
+
     const onClose = () => {
         setVisible(false);
     };
@@ -40,31 +41,32 @@ const SidebarNew = ({
         setVisible(true)
     };
 
-    const onSearch = (value) => {
+    const onSearch = async (value) => {
         setIsLoading(true);
-        Api
-            .findUsers(value)
-            .then(({data}) => {
-                setUsers(data);
-                setIsLoading(false);
-            })
-            .catch(() => {
+        try {
+            await findUsers(value)
+            setIsLoading(false)
+            return ({data}) => {
+                setUsers(data)
+            }
+        } catch (e) {
             setIsLoading(false);
-        });
+            return "Пользователь не найден"
+        }
     };
 
-    const onAddDialog = () => {
-        Api
-            .createDialog({
-                partner: selectedUserId,
-                text: messageText
-            })
-            .then(onClose)
-            .catch(() => {
-                setIsLoading(false);
-            });
-    }
-
+    const onAddDialog = async () => {
+        try {
+                await createDialog({
+                    partner: selectedUserId,
+                    text: messageText
+                })
+                onClose()
+        } catch(e) {
+            setIsLoading(false)
+            return "Ошибка при создании диалога"
+        }
+    };
 
     const handleChangeInput = (value) => {
         setInputValue(value)

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Result} from 'antd';
 
-import {Api} from "../../../Chat/utils/api"
+import {verifyHash} from "../../../Chat/Api"
 import {Block, Button} from "../components";
 
 const renderTextInfo = ({hash, verified}) => {
@@ -32,13 +32,17 @@ const CheckInfo = ({location, history}) => {
 
     useEffect(() => {
         if (hash) {
-            Api.verifyHash(hash).then(({data}) => {
+            (async () => {
+                await verifyHash(hash)
+            }) ()
+              return(({data}) => {
                 if (data.status === "success") {
                     setVerified(true)
                 }
             });
         }
     });
+
     return (
         <div>
             <Block>

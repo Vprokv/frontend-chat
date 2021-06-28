@@ -44,11 +44,9 @@ const SidebarNew = ({
     const onSearch = async (value) => {
         setIsLoading(true);
         try {
-            await findUsers(value)
+           const {data} = await findUsers(value)
             setIsLoading(false)
-            return ({data}) => {
-                setUsers(data)
-            }
+            setUsers(data)
         } catch (e) {
             setIsLoading(false);
             return "Пользователь не найден"

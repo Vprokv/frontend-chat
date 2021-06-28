@@ -7,7 +7,6 @@ const Socket = ({
                     onRemoveMessage,
                     onNewDialog,
                     onRemoveDialog,
-                    onUpdateMeta,
                     onSocketConnectedStatus,
                     setSocketConnectedStatus
                 }) => {

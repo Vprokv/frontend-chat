@@ -15,7 +15,7 @@ const HeaderNew = ({
     }
     const currentDialogObj = dialogs.filter(dialog => dialog._id === currentDialog)[0];
 
-    const online = (currentDialogObj.partner.isOnline === true) ? true : ""
+    const online = (currentDialogObj.partner.isOnline === true) ? true : "";
 
 
 
@@ -23,7 +23,7 @@ const HeaderNew = ({
         if (window.confirm("Вы действительно хотите удалить сообщение")) {
             await removeDialogById(dialog._id)
         }
-    }
+    };
 
     return (
         <div className="chat__dialog-header-center">

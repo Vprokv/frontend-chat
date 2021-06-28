@@ -1,5 +1,5 @@
 import openNotification from "../../utils/helpers/openNotification";
-import {getMe, signUp, signIn} from "../../Api";
+import {getMe, create, login} from "../../Api";
 
 const Actions = {
     setUserData: data => ({
@@ -23,9 +23,7 @@ const Actions = {
     },
     fetchUserLogin: postData => async dispatch => {
         try {
-            await signIn(postData)
-            return (({data}) => {
-                const {token} = data;
+            const {data: {token}, data} =await login(postData)
                 openNotification({
                     title: "Отлично!",
                     text: "Авторизация успешна.",
@@ -36,7 +34,6 @@ const Actions = {
                 dispatch(Actions.fetchUserData());
                 dispatch(Actions.setIsAuth(true));
                 return data;
-            })
         } catch (e) {
             if (e.status === 403) {
                 openNotification({
@@ -49,10 +46,8 @@ const Actions = {
     },
 
     fetchUserRegister: postData => async dispatch => {
-        await signUp(postData)
-        return (({data}) => {
-            return data;
-        });
+        const {data} = await create(postData)
+        return data;
     }
 };
 

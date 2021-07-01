@@ -17,11 +17,11 @@ const ChatInput = props => {
         setShowEmojiPicker(!emojiPickerVisible);
     };
 
-
     const handleSendMessage = async (e) => {
         if (e.keyCode === 13) {
             await sendMessage(value, currentDialog)
             setValue('');
+            console.log(value, currentDialog)
         }
     }
 

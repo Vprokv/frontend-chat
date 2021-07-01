@@ -9,27 +9,28 @@ const DialogsNew = ({
                         dialog,
                         meta,
                         currentDialog,
-                        onSelect
+                        onSelect,
+    userMeta
                     }) => {
 
 
     return (
-        <Link to={`/dialog/${dialog._id}`}>
+        <Link to={`/dialog/${dialog.id_dialog}`}>
             <div
                 className={classNames('dialogs__item', {
-                    'dialogs__item--online': dialog.partner.isOnline,
-                    'dialogs__item--selected': currentDialog === dialog._id
+                    // 'dialogs__item--online': dialog.partner.isOnline,
+                    'dialogs__item--selected': currentDialog === dialog.id_dialog
                 })}
-                onClick={onSelect.bind(this, dialog._id)}
+                onClick={onSelect.bind(this, dialog.id_dialog)}
             >
                 <div className="dialogs__item-avatar">
                     <Avatar
-                        user={dialog.partner}
+                        user={dialog}
                     />
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{dialog.partner.fullName}</b>
+                        <b>{dialog.name}</b>
                         <span>
                     {meta.lastMessage.createdAt &&
                     <MessageTime
@@ -43,7 +44,6 @@ const DialogsNew = ({
                             {meta.lastMessage.text}
                         </p>
 
-                        {/*{isMe && <IconReaded isMe={true} isReaded={true}/>}*/}
                         {meta.unread > 0 && <div className="dialogs__item-info-bottom-count">
                             {meta.unread > 9 ? "+9" : meta.unread}
                         </div>}
@@ -68,7 +68,7 @@ DialogsNew.propTypes ={
     ),
     dialog: PropTypes.shape(
         {
-            _id: PropTypes.string,
+            id_dialog: PropTypes.string,
             partner: {
                 _id: PropTypes.string,
                 fullName:PropTypes.string,
@@ -77,17 +77,31 @@ DialogsNew.propTypes ={
                 _id: PropTypes.string,
                 fullName:PropTypes.string,
             },
-            createdAt: PropTypes.string,
-            updatedAt: PropTypes.string,
         }
     )
 }
 
 DialogsNew.defaultProps = {
     meta: {
-        lastMessage: {}
+        lastMessage: {
+            _id: "",
+            text: "",
+            createdAt: "",
+        }
     },
-    dialog: {}
+    dialog: {
+        _id: "",
+        partner: {
+            _id: "",
+            fullName: "11",
+            isOnline: true,
+
+        },
+        author: {
+            _id: "",
+            fullName: "",
+        }
+    }
 };
 
 export default DialogsNew;

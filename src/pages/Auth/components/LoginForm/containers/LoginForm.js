@@ -7,7 +7,7 @@ import {userActions} from "../../../../Chat/redux/actions";
 
 import store from '../../../../Chat/redux/store';
 
-const LoginFormContainer = withFormik({
+export const LoginFormCont = withFormik({
     enableReinitialize: true,
     mapPropsToValues: () => ({
         email: "",
@@ -19,12 +19,7 @@ const LoginFormContainer = withFormik({
         return errors;
     },
     handleSubmit: async function a (values, { setSubmitting, props }) {
-        const result = await userActions.fetchUserLogin(values)
-        if (result.status === "success") {
-            setTimeout(() => {
-                props.history.push("/");
-            }, 50);
-        }
+        const result = await userActions.fetchUserLogin(values, props)
         setSubmitting(false);
         store.dispatch(result)
     },
@@ -32,5 +27,3 @@ const LoginFormContainer = withFormik({
     displayName: "LoginForm"
 })(LoginForm);
 
-
-export default LoginFormContainer;

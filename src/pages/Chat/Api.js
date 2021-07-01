@@ -17,20 +17,26 @@ export const getDialogMeta = async() => {
     const {data} = await axios.get("/meta")
     return data
 }
+
+export const getUserMeta = async() => {
+    const {data} = await axios.get("/user/meta")
+    return data
+}
+
 export const getDialog = async () => {
     const {data} = await axios.get("/dialogs")
     return data
 }
 export const getMessages = async (dialogId) => {
-    const {data} = await axios.get("/messages?dialog=" + dialogId)
+    const {data} = await axios.get("/messages?dialog_id=" + dialogId)
     return data
 }
-export const createDialog = ({partner_id, text}) => axios.post("/dialogs", {partner_id, text})
-export const removeDialogById = dialogId => axios.delete("/dialogs/id=" + dialogId)
-export const sendMessage = (text, dialogId) => axios.post("/messages", {text, dialogId})
-export const removeMessageById = messageId => axios.delete("/messages?id=" + messageId)
+export const createDialog = ({partner_id, name}) => axios.post("/dialogs", {partner_id, name})
+export const removeDialogById = dialog_id => axios.delete("/dialogs/" + dialog_id)
+export const sendMessage = (text, dialog_id) => axios.post("/messages", {text, dialog_id})
+export const removeMessageById = message_id => axios.delete("/messages/" + message_id)
 export const findUsers = async (query) => {
-    const {data} = await axios.get("user/find?=" + query)
+    const {data} = await axios.get("/user/find",{params:{query}})
     return data
 }
 

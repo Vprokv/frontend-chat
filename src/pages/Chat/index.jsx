@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Empty} from "antd";
 
-import {getDialog, getDialogMeta, getMessages} from "./Api"
+import {getDialog, getDialogMeta, getMessages, getUserMeta} from "./Api"
 import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
 
 import {ChatInput }from "../Chat/components/index"
@@ -9,10 +9,11 @@ import "./Chat.scss";
 
 
 const Chat = () => {
-    const [isSocketConnected, setSocketConnectedStatus] = useState(false)
-    const [messages, setMessages] = useState({})
+    const [socketConnected, setSocketConnectedStatus] = useState(true)
+    const [messages, setMessages] = useState([])
     const [dialogs, setDialogs] = useState([])
     const [dialogsMeta, setDialogsMeta] = useState({})
+    const [userMeta, setUserMeta] = useState({})
     const [currentDialog, setCurrentDialog] = useState("")
 
     const onNewMessage = useCallback(({message, dialogId}) => {
@@ -45,28 +46,42 @@ const Chat = () => {
 
 
     useEffect(() => {
-        if (isSocketConnected) {
+        if (socketConnected) {
             (async () => {
                 setDialogs(await getDialog())
             })()
         }
-    }, [isSocketConnected])
+    }, [socketConnected])
+
+    console.log(dialogs)
 
     useEffect(() => {
-        if (currentDialog && !messages[currentDialog]) {
+        if (currentDialog) {
             (async () => {
-                setMessages(await getMessages())
+                setMessages(await getMessages(currentDialog))
             }) ()
         }
-    }, [currentDialog, messages])
+    }, [currentDialog])
+
 
     useEffect(() => {
-        if (isSocketConnected) {
+        if (socketConnected) {
             (async () => {
                 setDialogsMeta(await getDialogMeta())
+
             })()
         }
-    }, [isSocketConnected])
+    }, [socketConnected])
+
+    useEffect(() => {
+        if (socketConnected) {
+            (async () => {
+                setUserMeta(await getUserMeta())
+
+            })()
+        }
+    }, [socketConnected])
+
 
 
     return (
@@ -74,6 +89,8 @@ const Chat = () => {
             <SidebarNew
                 dialogs={dialogs}
                 dialogsMeta={dialogsMeta}
+                userMeta={userMeta}
+                setUserMeta={setUserMeta}
                 currentDialog={currentDialog}
                 setCurrentDialog={setCurrentDialog}
             />
@@ -89,7 +106,8 @@ const Chat = () => {
                     <>
                         <div className="chat__dialog-messages">
                             <MessagesNew
-                                messages={messages[currentDialog]}
+                                messages={messages}
+
                             />
                         </div>
                         <ChatInput
@@ -100,16 +118,18 @@ const Chat = () => {
                 }
                 <Socket
                     currentDialog={currentDialog}
-                    onSocketConnectedStatus={setSocketConnectedStatus}
                     onNewMessage={onNewMessage}
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
+                    setSocketConnectedStatus={setSocketConnectedStatus}
 
                 />
             </div>
     </section>
 )};
-
+SidebarNew.defaultProps = {
+    dialogs: {},
+}
 
 export default Chat;

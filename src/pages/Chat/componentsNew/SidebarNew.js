@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import {Button, Form, Input, Modal, Select} from "antd";
 import {FormOutlined, TeamOutlined} from "@ant-design/icons";
 import DialogsNew from "./Dialogs/DialogsNew";
-
 import {findUsers, createDialog} from "../Api";
-import {connect} from "react-redux";
+
 
 const {Option} = Select;
 const {TextArea} = Input;
@@ -14,24 +13,24 @@ const SidebarNew = ({
                         dialogs,
                         dialogsMeta,
                         setCurrentDialog,
+    userMeta,
 
 }) => {
     const [visible, setVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const [messageText, setMessageText] = useState("");
+    const [headerText, setHeaderText] = useState("");
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedUserId, setSelectedUserId] = useState(false);
 
-    const options = users.map(
-        user => (
-            <Option
-                key={user._id}
-            >
-                {user.fullName}
-            </Option>
-        ));
+    const options = users.map(function (user) {
+        const {_id, fullname} = user
 
+        return <Option
+            key={_id}
+        >
+            {fullname}
+        </Option>
+    })
 
     const onClose = () => {
         setVisible(false);
@@ -44,20 +43,21 @@ const SidebarNew = ({
     const onSearch = async (value) => {
         setIsLoading(true);
         try {
-           const {data} = await findUsers(value)
-            setIsLoading(false)
+           const data = await findUsers(value)
             setUsers(data)
+            setIsLoading(false)
         } catch (e) {
             setIsLoading(false);
             return "Пользователь не найден"
         }
+
     };
 
     const onAddDialog = async () => {
         try {
                 await createDialog({
-                    partner: selectedUserId,
-                    text: messageText
+                    partner_id: inputValue,
+                    name: headerText
                 })
                 onClose()
         } catch(e) {
@@ -71,13 +71,8 @@ const SidebarNew = ({
     };
 
     const onChangeTextArea = e => {
-        setMessageText(e.target.value)
+        setHeaderText(e.target.value)
     }
-
-    const onSelectUser = userId => {
-        setSelectedUserId(userId)
-    };
-
 
     return (
         <div className="chat__sidebar">
@@ -99,18 +94,20 @@ const SidebarNew = ({
             <div className="dialogs__search">
                 <Input
                     placeholder="Поиск среди контактов"
-                    onChange={e => onSearch(e.target.value)}
-                    value={inputValue}
+                    // onChange={e => onSearch(e.target.value)}
+                    // value={inputValue}
                 />
             </div>
 
             <div className="chat__sidebar-dialogs">
 
                 {dialogs.map((dialog) => (
+
                     <DialogsNew
                         dialog={dialog}
-                        meta={dialogsMeta[dialog._id]}
-                        onClick={() => setCurrentDialog(dialog._id)}
+                        meta={dialogsMeta[dialog.id_dialog]}
+                        userMeta={userMeta[dialog.id_dialog]}
+                        onClick={() => setCurrentDialog(dialog.id_dialog)}
                         onSelect={setCurrentDialog}
                     />
                 ))
@@ -127,7 +124,7 @@ const SidebarNew = ({
                             Закрыть
                         </Button>,
                         <Button
-                            disabled={!messageText}
+                            disabled={!headerText}
                             key="submit"
                             type="primary"
                             loading={isLoading}
@@ -147,7 +144,6 @@ const SidebarNew = ({
                                 value={inputValue}
                                 onSearch={onSearch}
                                 onChange={handleChangeInput}
-                                onSelect={onSelectUser}
                                 notFoundContent={null}
                                 defaultActiveFirstOption={false}
                                 showArrow={false}
@@ -157,12 +153,12 @@ const SidebarNew = ({
                                 {options}
                             </Select>
                         </Form.Item>
-                    {selectedUserId && (
-                        <Form.Item label="Введите текст сообщения">
+                    { (
+                        <Form.Item label="Введите название диалога">
                             <TextArea
-                                autosize={{ minRows: 3, maxRows: 10 }}
+                                autosize={{ minRows: 3, maxRows: 5 }}
                                 onChange={onChangeTextArea}
-                                value={messageText}
+                                value={headerText}
                             />
                         </Form.Item>
                     )}
@@ -176,11 +172,14 @@ const SidebarNew = ({
 SidebarNew.defaultProps = {
     dialogs: {},
     dialogsMeta: {},
+    dialog: {
+        id_dialog: ""
+    },
+    meta: {},
     currentDialog: "",
     setCurrentDialog : "",
     users: []
 }
 
 
-export default connect((({user}) => ({user: user.data}))
-)(SidebarNew);
+export default SidebarNew;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Avatar.scss';
-import {generateAvatarFromHash} from "../../utils/helpers";
+import {generateAvatarFromHash, upperCase} from "../../utils/helpers";
 
 
 
@@ -15,8 +15,8 @@ const Avatar = ({user}) => {
             />
         );
     } else {
-        const {color, colorLighten} = generateAvatarFromHash(user._id);
-        const firstChar = user.fullName[0].toUpperCase();
+        const {color, colorLighten} = generateAvatarFromHash(user.id_user+"f78fdb18bf39b23d42313edfaf7e0a44");
+
         return (
         <div
             style={{
@@ -24,7 +24,7 @@ const Avatar = ({user}) => {
             }}
             className="avatar avatar--symbol"
         >
-            {firstChar}
+            {upperCase(user.name)}
         </div>)
     }
 };

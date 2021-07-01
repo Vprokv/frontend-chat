@@ -7,14 +7,13 @@ const Socket = ({
                     onRemoveMessage,
                     onNewDialog,
                     onRemoveDialog,
-                    onSocketConnectedStatus,
-                    setSocketConnectedStatus
+                    setSocketConnectedStatus,
+
                 }) => {
 
-
     useEffect(() => {
-        socket.on("SERVER:DIALOG_CREATED", onNewDialog);
-        return () => socket.removeListener("SERVER:DIALOG_CREATED", onNewDialog)
+        socket.on("SERVER:NEW_DIALOG", onNewDialog);
+        return () => socket.removeListener("SERVER:NEW_DIALOG", onNewDialog)
 
         socket.on("SERVER:DIALOG_DELETED", onRemoveDialog);
         return () => socket.removeListener("SERVER:DIALOG_DELETED", onRemoveDialog);
@@ -26,11 +25,8 @@ const Socket = ({
         return () => socket.removeListener("SERVER:MESSAGE_DELETED", onRemoveMessage);
 
 
-        onSocketConnectedStatus(true)
+        setSocketConnectedStatus((prevStatus) => !prevStatus)
 
-        return () => {
-            onSocketConnectedStatus(false)
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return null

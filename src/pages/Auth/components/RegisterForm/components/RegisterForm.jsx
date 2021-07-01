@@ -8,14 +8,14 @@ const success = false;
 
 const RegisterForm = props => {
     const {
-            values,
-            touched,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isValid,
-            isSubmitting
+        values,
+        touched,
+        errors,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isValid,
+        isSubmitting
     }
 = props;
 
@@ -44,7 +44,7 @@ const RegisterForm = props => {
                             />
 
                             <FormField
-                                name="fullName"
+                                name="fullname"
                                 prefix={<UserOutlined style={{color: "rgba(0,0,0,.25)"}}/>}
                                 placeholder="Ваше имя"
                                 handleChange={handleChange}

@@ -13,32 +13,29 @@ const HeaderNew = ({
     if (!dialogs || !currentDialog) {
         return null;
     }
-    const currentDialogObj = dialogs.filter(dialog => dialog._id === currentDialog)[0];
+    const currentDialogObj = dialogs.filter(dialog => dialog.id_dialog === currentDialog)[0];
+    // const online = (currentDialogObj.partner.isOnline === true) ? true : "";
 
-    const online = (currentDialogObj.partner.isOnline === true) ? true : "";
-
-
-
-    const RemoveDialog = async (dialog) => {
+    const RemoveDialog = async (id) => {
         if (window.confirm("Вы действительно хотите удалить сообщение")) {
-            await removeDialogById(dialog._id)
+            await removeDialogById(id)
         }
     };
 
     return (
         <div className="chat__dialog-header-center">
             <b className="chat__dialog-header-username">
-                {currentDialogObj.partner.fullName}
+                {currentDialogObj.name}
             </b>
             <span
-                className={online === true ? "status--online" : "status"}
+                // className={online === true ? "status--online" : "status"}
             >
-                {online === true ? "онлайн" : "офлайн"}
+                {/*{online === true ? "онлайн" : "офлайн"}*/}
             </span>
             <Popover
                 content={
                     <Button
-                        onClick={RemoveDialog}>
+                        onClick={()=>RemoveDialog(currentDialogObj.id_dialog)}>
                         Удалить текущий диалог
                     </Button>
                 }>
@@ -56,10 +53,16 @@ const HeaderNew = ({
 HeaderNew.defaultProps = {
     dialogs: {
         partner: {
-            _id: PropTypes.string,
+            _id: PropTypes.number,
             fullName: PropTypes.string,
             isOnline: PropTypes.bool,
         },
+    },
+    dialog: {
+        _id: "",
+        id_dialog: "",
+        id_user: "",
+        name: ""
     }
 };
 

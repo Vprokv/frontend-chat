@@ -1,5 +1,6 @@
 import openNotification from "../../utils/helpers/openNotification";
 import {getMe, create, login} from "../../Api";
+import {history} from "../../../../index";
 
 const Actions = {
     setUserData: data => ({
@@ -14,26 +15,30 @@ const Actions = {
        try {
            dispatch(Actions.setUserData(await getMe()))
        }
-       catch (err){
-           if (err.response.status === 403) {
+       catch (e){
+           if (e.response.status === 403) {
                dispatch(Actions.setIsAuth(false))
                delete window.localStorage.token;
            }
        }
     },
-    fetchUserLogin: postData => async dispatch => {
+    fetchUserLogin: (postData) => async dispatch => {
         try {
-            const {data: {token}, data} =await login(postData)
-                openNotification({
-                    title: "Отлично!",
-                    text: "Авторизация успешна.",
-                    type: "success"
-                });
-                window.axios.defaults.headers.common["token"] = token;
-                window.localStorage["token"] = token;
-                dispatch(Actions.fetchUserData());
-                dispatch(Actions.setIsAuth(true));
-                return data;
+            const {data: {token}, data} = await login(postData)
+            console.log(data)
+            if (data.status === "success") {
+                setTimeout(() => {
+                        history.push("/");
+                    }, 100);
+            }
+            openNotification({
+                title: "Отлично!",
+                text: "Авторизация успешна.",
+                type: "success"
+            });
+            window.axios.defaults.headers.common["token"] = token;
+            window.localStorage["token"] = token;
+            dispatch(Actions.setIsAuth(true));
         } catch (e) {
             if (e.status === 403) {
                 openNotification({
@@ -45,9 +50,22 @@ const Actions = {
         }
     },
 
-    fetchUserRegister: postData => async dispatch => {
-        const {data} = await create(postData)
-        return data;
+    fetchUserRegister: (postData) => async dispatch => {
+        try {
+            const {data} = await create(postData)
+            if (data.status === "success") {
+                setTimeout(() => {
+                    history.push("/signUp/verify");
+                }, 100);
+            }
+            dispatch(Actions.setIsAuth(false));
+        } catch (e) {
+            if (e.status === 404)
+            openNotification({
+                title: "Ошибка при регистрации",
+                type: "error"
+            });
+        }
     }
 };
 

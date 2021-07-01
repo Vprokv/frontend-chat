@@ -3,12 +3,6 @@ import {Form} from "antd";
 import {LockOutlined, MailOutlined} from '@ant-design/icons';
 import {Button, Block, FormField} from "../../components";
 import {Link} from 'react-router-dom';
-import {withFormik} from "formik";
-import validateForm from "../../../utils/validate";
-import {userActions} from "../../../../Chat/redux/actions";
-import store from "../../../../Chat/redux/store";
-
-
 
 const LoginForm = props =>{
     const {
@@ -22,8 +16,6 @@ const LoginForm = props =>{
     isSubmitting,
 }
 = props;
-
-
 
 return (
     <>

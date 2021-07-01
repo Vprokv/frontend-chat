@@ -6,7 +6,7 @@ import {userActions} from "../../../../Chat/redux/actions";
 
 import store from '../../../../Chat/redux/store';
 
-export default withFormik({
+export const RegisterFormCont = withFormik({
     enableReinitialize: true,
     mapPropsToValues: () => ({
         email: "",
@@ -21,12 +21,14 @@ export default withFormik({
         return errors;
     },
     handleSubmit: async function a (values, { setSubmitting, props }) {
-        const result = await userActions.fetchUserRegister(values)
-        if (result.status === "success") {
-            setTimeout(() => {
-                props.history.push("/signUp/verify");
-            }, 50);
-        }
+        console.log(5)
+        const result = userActions.fetchUserRegister(values)
+
+        // if (result.status === "success") {
+        //     setTimeout(() => {
+        //         props.history.push("/signUp/verify");
+        //     }, 50);
+        // }
         setSubmitting(false);
         store.dispatch(result)
     },

@@ -42,6 +42,7 @@ import {removeMessageById} from "../../Api";
 const MessagesNew = ({
                          messages,
                          user,
+                         userMeta
                      }) => {
 
 
@@ -50,14 +51,13 @@ const MessagesNew = ({
         messagesRef.current.scrollTo(0, 999999);
     }, [messages]);
 
-
-    const RemoveMessage = async (message) => {
-        if (window.confirm("Вы действительно хотите удалить сообщение")) {
-            try {
-                await removeMessageById(message._id)
-            } catch (e) {
-                return "Ошибка при удалении"
+    const RemoveMessage = async (id) => {
+        try {
+            if (window.confirm("Вы действительно хотите удалить сообщение")) {
+                await removeMessageById(id)
             }
+        } catch (e) {
+            return e.message
         }
     }
 
@@ -66,7 +66,7 @@ const MessagesNew = ({
             ref={messagesRef}
         >
             {messages.map((message) => (
-                <div className={message.author._id === user._id ? "message--is-me" : "message"}>
+                <div className={message.author_id === user._id ? "message--is-me" : "message"}>
                     <div className="message__content">
                         {messages && !message._id ?
                             <Empty description="Диалог пуст. Отправьте первое сообщение"/>
@@ -76,7 +76,7 @@ const MessagesNew = ({
                                         content={
                                             <div>
                                                 <Button
-                                                    onClick={RemoveMessage}>
+                                                    onClick={()=>RemoveMessage(message._id)}>
                                                     Удалить сообщение
                                                 </Button>
                                             </div>
@@ -89,25 +89,17 @@ const MessagesNew = ({
 
                                     </Popover>
                                     <div className="message__avatar">
-                                        <Avatar user={message.author}/>
+                                        <Avatar user={message.author_id}/>
                                     </div>
                                     <div className="message__info">
                                         <div className="message__bubble">
                                             {message.text &&
                                             <p className="message__text">{message.text}</p>
                                             }
-                                            {/*                {isTyping && (*/}
-                                            {/*                    <div className="message__typing">*/}
-                                            {/*                        <span />*/}
-                                            {/*                        <span />*/}
-                                            {/*                        <span />*/}
-                                            {/*                    </div>*/}
-                                            {/*                )}*/}
-                                            {/*                />}*/}
                                         </div>
-                                        {message.createdAt && (
+                                        {message.createdat && (
                                             <span className="message__date">
-                              <Time date={message.createdAt}/>
+                              <Time date={message.createdat}/>
                             </span>
                                         )}
                                     </div>

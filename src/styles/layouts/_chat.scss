@@ -46,10 +46,10 @@
 
     &-dialogs {
       height: calc(100% - 136px);
-
+      overflow: auto;
       .dialogs {
         height: 100%;
-        overflow: auto;
+
         &__item {
           padding: 10px 20px;
           margin-bottom: 0;
@@ -140,8 +140,8 @@
     }
 
 
-    &-messages{
-
+    &-messages {
+      overflow: auto;
       height: calc(100% - 138px);
     }
   }

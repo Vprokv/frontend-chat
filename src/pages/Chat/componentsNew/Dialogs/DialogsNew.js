@@ -15,13 +15,13 @@ const DialogsNew = ({
 
 
     return (
-        <Link to={`/dialog/${dialog.id_dialog}`}>
+        <Link to={`/dialog/${dialog._id_dialog}`}>
             <div
                 className={classNames('dialogs__item', {
                     // 'dialogs__item--online': dialog.partner.isOnline,
-                    'dialogs__item--selected': currentDialog === dialog.id_dialog
+                    'dialogs__item--selected': currentDialog === dialog._id_dialog
                 })}
-                onClick={onSelect.bind(this, dialog.id_dialog)}
+                onClick={onSelect.bind(this, dialog._id_dialog)}
             >
                 <div className="dialogs__item-avatar">
                     <Avatar
@@ -68,7 +68,7 @@ DialogsNew.propTypes ={
     ),
     dialog: PropTypes.shape(
         {
-            id_dialog: PropTypes.string,
+            _id_dialog: PropTypes.string,
             partner: {
                 _id: PropTypes.string,
                 fullName:PropTypes.string,

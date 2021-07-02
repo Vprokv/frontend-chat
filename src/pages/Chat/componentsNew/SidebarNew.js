@@ -53,6 +53,7 @@ const SidebarNew = ({
 
     };
 
+
     const onAddDialog = async () => {
         try {
                 await createDialog({
@@ -73,6 +74,7 @@ const SidebarNew = ({
     const onChangeTextArea = e => {
         setHeaderText(e.target.value)
     }
+console.log(dialogs)
 
     return (
         <div className="chat__sidebar">
@@ -105,9 +107,9 @@ const SidebarNew = ({
 
                     <DialogsNew
                         dialog={dialog}
-                        meta={dialogsMeta[dialog.id_dialog]}
-                        userMeta={userMeta[dialog.id_dialog]}
-                        onClick={() => setCurrentDialog(dialog.id_dialog)}
+                        meta={dialogsMeta[dialog._id_dialog]}
+                        userMeta={userMeta[dialog._id_dialog]}
+                        onClick={() => setCurrentDialog(dialog._id_dialog)}
                         onSelect={setCurrentDialog}
                     />
                 ))

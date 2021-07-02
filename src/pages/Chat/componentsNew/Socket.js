@@ -18,7 +18,7 @@ const Socket = ({
         socket.on("SERVER:DIALOG_DELETED", onRemoveDialog);
         return () => socket.removeListener("SERVER:DIALOG_DELETED", onRemoveDialog);
 
-        socket.on("SERVER:NEW_MESSAGE", onNewMessage);
+        socket.on("SERVER:NEW_MESSAGE", (w)=>{console.log(1,w)});
         return () => socket.removeListener("SERVER:NEW_MESSAGE", onNewMessage);
 
         socket.on("SERVER:MESSAGE_DELETED", onRemoveMessage);

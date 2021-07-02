@@ -17,6 +17,7 @@ const Chat = () => {
     const [currentDialog, setCurrentDialog] = useState("")
 
     const onNewMessage = useCallback(({newMessage, dialog_id}) => {
+        console.log(newMessage)
         setMessages((prevMessages) => ({
             ...prevMessages,
             [dialog_id]: [...prevMessages[dialog_id], newMessage]
@@ -34,7 +35,8 @@ const Chat = () => {
         }))
     }, [])
 
-    const onNewDialog = useCallback(({dialog}) => {
+    const onNewDialog = useCallback((dialog) => {
+
         setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
 
     const onRemoveDialog = useCallback(({dialog_id}) => {

@@ -13,7 +13,7 @@ const HeaderNew = ({
     if (!dialogs || !currentDialog) {
         return null;
     }
-    const currentDialogObj = dialogs.filter(dialog => dialog.id_dialog === currentDialog)[0];
+    const currentDialogObj = dialogs.filter(dialog => dialog._id_dialog === currentDialog)[0];
     // const online = (currentDialogObj.partner.isOnline === true) ? true : "";
 
     const RemoveDialog = async (id) => {
@@ -35,7 +35,7 @@ const HeaderNew = ({
             <Popover
                 content={
                     <Button
-                        onClick={()=>RemoveDialog(currentDialogObj.id_dialog)}>
+                        onClick={()=>RemoveDialog(currentDialogObj._id_dialog)}>
                         Удалить текущий диалог
                     </Button>
                 }>

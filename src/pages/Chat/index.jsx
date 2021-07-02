@@ -2,9 +2,9 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {Empty} from "antd";
 
 import {getDialog, getDialogMeta, getMessages, getUserMeta} from "./Api"
-import {SidebarNew, HeaderNew, MessagesNew, Socket }from "./componentsNew"
+import {SidebarNew, HeaderNew, MessagesNew, Socket, ChatInput }from "./componentsNew"
 
-import {ChatInput }from "../Chat/components/index"
+// import ChatInput from "./componentsNew/ChatInput/ChatInput"
 import "./Chat.scss";
 
 

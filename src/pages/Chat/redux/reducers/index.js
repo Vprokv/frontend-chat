@@ -1,9 +1,6 @@
 import {combineReducers} from "redux";
 
-const reducers = [
-    // 'messages',
-    // 'dialogs',
-    'user'];
+const reducers = ['user'];
 
 export default combineReducers(
     reducers.reduce((initial, name) => {

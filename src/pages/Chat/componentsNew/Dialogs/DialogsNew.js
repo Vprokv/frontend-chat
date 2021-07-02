@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar} from "../../components/components";
+import Avatar from "../Avatar/Avatar";
 import classNames from "classnames";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";

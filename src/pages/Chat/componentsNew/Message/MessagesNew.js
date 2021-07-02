@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import {Popover, Button, Spin, Empty} from "antd";
 import {EllipsisOutlined} from "@ant-design/icons";
 
-import {Time, Avatar } from "../../components/components"
+import Time from "../Time/index"
+import Avatar from "../Avatar/Avatar"
 import './MessageNew.scss';
 import {removeMessageById} from "../../Api";
 

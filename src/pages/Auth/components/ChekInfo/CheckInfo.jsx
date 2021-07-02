@@ -4,44 +4,17 @@ import {Result} from 'antd';
 import {verifyHash} from "../../../Chat/Api"
 import {Block, Button} from "../components";
 
-const renderTextInfo = ({hash, verified}) => {
-    if (hash) {
-        if (verified) {
-            return {
-                status: "success",
-                message: "Аккаунт успешно подтвержден!"
-            };
-        } else {
-            return {
-                status: "error",
-                message: "Ошибка при подтверждении аккаунта!"
-            };
-        }
-    } else {
+const renderTextInfo = ({}) => {
         return {
             status: "success",
             message: "Перейдите на страницу авторизации"
         };
-    }
 };
 
-const CheckInfo = ({location, history}) => {
-    const [verified, setVerified] = useState(false)
-    const hash = location.search.split('hash')[1];
-    const info = renderTextInfo(hash, verified);
+const CheckInfo = ({history}) => {
+    const verified = true
+    const info = renderTextInfo(verified);
 
-    useEffect(() => {
-        if (hash) {
-            (async () => {
-                await verifyHash(hash)
-            }) ()
-              return(({data}) => {
-                if (data.status === "success") {
-                    setVerified(true)
-                }
-            });
-        }
-    });
 
     return (
         <div>

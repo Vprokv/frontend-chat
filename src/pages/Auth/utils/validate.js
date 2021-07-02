@@ -24,7 +24,7 @@ const rules ={
         }
     },
 
-    fullName: (value)=>{
+    fullname: (value)=>{
         if (!isAuth && !value) {
             errors.fullName = "Введите имя и фамилию" ;
         }

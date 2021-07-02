@@ -16,19 +16,19 @@ const Chat = () => {
     const [userMeta, setUserMeta] = useState({})
     const [currentDialog, setCurrentDialog] = useState("")
 
-    const onNewMessage = useCallback(({message, dialogId}) => {
+    const onNewMessage = useCallback(({newMessage, dialog_id}) => {
         setMessages((prevMessages) => ({
             ...prevMessages,
-            [dialogId]: [...prevMessages[dialogId], message]
+            [dialog_id]: [...prevMessages[dialog_id], newMessage]
         }))
     }, [])
 
-    const onRemoveMessage = useCallback(({messageId, dialogId}) => {
+    const onRemoveMessage = useCallback(({message_id, dialog_id}) => {
         setMessages((prevMessages) => ({
             ...prevMessages,
-            [dialogId]: [...prevMessages[dialogId]]
+            [dialog_id]: [...prevMessages[dialog_id]]
                 .splice(
-                    prevMessages[dialogId].findIndex(({_id})=>messageId===_id),
+                    prevMessages[dialog_id].findIndex(({_id})=>message_id===_id),
                     1
                 )
         }))
@@ -37,10 +37,10 @@ const Chat = () => {
     const onNewDialog = useCallback(({dialog}) => {
         setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
 
-    const onRemoveDialog = useCallback(({ dialogId}) => {
+    const onRemoveDialog = useCallback(({dialog_id}) => {
         setDialogs((prevDialogs) => [...prevDialogs]
                 .splice(
-                    prevDialogs.findIndex(({_id})=>dialogId===_id),
+                    prevDialogs.findIndex(({_id})=>dialog_id===_id),
                     1)
         )}, [])
 
@@ -53,7 +53,6 @@ const Chat = () => {
         }
     }, [socketConnected])
 
-    console.log(dialogs)
 
     useEffect(() => {
         if (currentDialog) {
@@ -117,19 +116,14 @@ const Chat = () => {
                     </>
                 }
                 <Socket
-                    currentDialog={currentDialog}
                     onNewMessage={onNewMessage}
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
                     setSocketConnectedStatus={setSocketConnectedStatus}
-
                 />
             </div>
     </section>
 )};
-SidebarNew.defaultProps = {
-    dialogs: {},
-}
 
 export default Chat;

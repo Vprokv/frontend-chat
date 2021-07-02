@@ -21,7 +21,7 @@ const ChatInput = props => {
         if (e.keyCode === 13) {
             await sendMessage(value, currentDialog)
             setValue('');
-            console.log(value, currentDialog)
+
         }
     }
 

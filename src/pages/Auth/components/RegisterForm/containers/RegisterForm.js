@@ -10,7 +10,7 @@ export const RegisterFormCont = withFormik({
     enableReinitialize: true,
     mapPropsToValues: () => ({
         email: "",
-        fullName: '',
+        fullname: '',
         password: "",
         password_2: "",
     }),
@@ -20,17 +20,20 @@ export const RegisterFormCont = withFormik({
 
         return errors;
     },
-    handleSubmit: async function a (values, { setSubmitting, props }) {
-        console.log(5)
-        const result = userActions.fetchUserRegister(values)
+    handleSubmit: (values, { setSubmitting, props })=>{
+        {
+            console.log(5)
+            const result = userActions.fetchUserRegister(values)
+            setSubmitting(false);
+            store.dispatch(result)
+    }
 
         // if (result.status === "success") {
         //     setTimeout(() => {
         //         props.history.push("/signUp/verify");
         //     }, 50);
         // }
-        setSubmitting(false);
-        store.dispatch(result)
+
     },
     displayName: "RegisterForm"
 })(RegisterForm);

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {EllipsisOutlined} from "@ant-design/icons";
-import {Button, Popover} from "antd";
+import {Button, Empty, Popover} from "antd";
 import {removeDialogById} from "../../Api";
 
 const HeaderNew = ({
                        dialogs,
                        currentDialog,
-
+                       userMeta
 }) => {
     if (!dialogs || !currentDialog) {
         return null;
@@ -23,10 +23,13 @@ const HeaderNew = ({
     };
 
     return (
+        <>
+        {currentDialogObj?
         <div className="chat__dialog-header-center">
-            <b className="chat__dialog-header-username">
-                {currentDialogObj.name}
-            </b>
+                <b className="chat__dialog-header-username">
+                    {userMeta[currentDialog].fullname}
+                </b>
+
             <span
                 // className={online === true ? "status--online" : "status"}
             >
@@ -44,8 +47,9 @@ const HeaderNew = ({
                     <EllipsisOutlined style={{fontSize: "22px"}}/>
                 </Button>
             </Popover>
-        </div>
-
+        </div> :  ""
+        }
+        </>
     )
 };
 

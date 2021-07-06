@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Result} from 'antd';
 
-import {verifyHash} from "../../../Chat/Api"
 import {Block, Button} from "../components";
 
 const renderTextInfo = ({}) => {

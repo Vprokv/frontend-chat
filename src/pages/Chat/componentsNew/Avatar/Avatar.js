@@ -4,6 +4,11 @@ import './Avatar.scss';
 import {generateAvatarFromHash, upperCase} from "../../utils/helpers";
 
 
+const getRandomInRange = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+getRandomInRange(1, 10)
 
 const Avatar = ({user}) => {
     if (user.avatar) {
@@ -11,12 +16,11 @@ const Avatar = ({user}) => {
             <img
                 className="avatar"
                 src={user.avatar}
-                alt={`Avatar ${user.fullName}`}
+                alt={`Avatar ${user.fullname}`}
             />
         );
     } else {
-        const {color, colorLighten} = generateAvatarFromHash(user.id_user+"f78fdb18bf39b23d42313edfaf7e0a44");
-
+        const {color, colorLighten} = generateAvatarFromHash((user.author_id|| user.id_user)+"a78fdb18bf39b23d42313edfaf7e0a44");
         return (
         <div
             style={{
@@ -24,14 +28,14 @@ const Avatar = ({user}) => {
             }}
             className="avatar avatar--symbol"
         >
-            {upperCase(user.name)}
+            {upperCase(user.fullname)}
         </div>)
     }
 };
 
 Avatar.defaultProps = {
     user: {
-        fullName:PropTypes.string,
+        fullname:PropTypes.string,
         avatar: {},
     },
 };

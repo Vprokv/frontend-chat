@@ -3,40 +3,42 @@ import {Empty} from "antd";
 
 import {getDialog, getDialogMeta, getMessages, getUserMeta} from "./Api"
 import {SidebarNew, HeaderNew, MessagesNew, Socket, ChatInput }from "./componentsNew"
-
-// import ChatInput from "./componentsNew/ChatInput/ChatInput"
 import "./Chat.scss";
 
 
 const Chat = () => {
-    const [socketConnected, setSocketConnectedStatus] = useState(true)
+    const [socketConnected, setSocketConnectedStatus] = useState(false)
     const [messages, setMessages] = useState([])
     const [dialogs, setDialogs] = useState([])
     const [dialogsMeta, setDialogsMeta] = useState({})
     const [userMeta, setUserMeta] = useState({})
     const [currentDialog, setCurrentDialog] = useState("")
 
-    const onNewMessage = useCallback(({newMessage, dialog_id}) => {
-        console.log(newMessage)
-        setMessages((prevMessages) => ({
+    const onNewMessage = useCallback((newMessage) => {
+        setMessages((prevMessages) => {
+            return({
             ...prevMessages,
-            [dialog_id]: [...prevMessages[dialog_id], newMessage]
-        }))
+            [newMessage.dialog_id]: [...prevMessages[newMessage.dialog_id], newMessage]
+        })})
     }, [])
 
+
     const onRemoveMessage = useCallback(({message_id, dialog_id}) => {
-        setMessages((prevMessages) => ({
-            ...prevMessages,
-            [dialog_id]: [...prevMessages[dialog_id]]
-                .splice(
-                    prevMessages[dialog_id].findIndex(({_id})=>message_id===_id),
-                    1
-                )
-        }))
+        setMessages((prevMessages) => {
+            const nextMessages = [...prevMessages[dialog_id]]
+            nextMessages.splice(
+                prevMessages[dialog_id].findIndex(({_id}) => message_id === _id),
+                1
+            )
+            return ({
+                    ...prevMessages,
+                    [dialog_id]: nextMessages
+                })
+            }
+        )
     }, [])
 
     const onNewDialog = useCallback((dialog) => {
-
         setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
 
     const onRemoveDialog = useCallback(({dialog_id}) => {
@@ -46,6 +48,9 @@ const Chat = () => {
                     1)
         )}, [])
 
+    const SocketStatus = useCallback(() => {
+        setSocketConnectedStatus((prevStatus) => !prevStatus)
+    }, [])
 
     useEffect(() => {
         if (socketConnected) {
@@ -56,11 +61,17 @@ const Chat = () => {
     }, [socketConnected])
 
 
+
     useEffect(() => {
         if (currentDialog) {
             (async () => {
-                setMessages(await getMessages(currentDialog))
-            }) ()
+                const newMessages = await getMessages(currentDialog)
+                setMessages((prevMessages) => ({
+                        ...prevMessages,
+                        [currentDialog]: newMessages
+                    })
+                )
+            })()
         }
     }, [currentDialog])
 
@@ -100,17 +111,18 @@ const Chat = () => {
                     <HeaderNew
                         dialogs={dialogs}
                         currentDialog={currentDialog}
+                        userMeta={userMeta}
                     />
                 </div>
                 {!currentDialog ?
                     <Empty description="Откройте диалог"/> :
                     <>
-                        <div className="chat__dialog-messages">
+
                             <MessagesNew
-                                messages={messages}
+                                messages={messages[currentDialog]}
 
                             />
-                        </div>
+
                         <ChatInput
                             currentDialog={currentDialog}
 
@@ -122,7 +134,7 @@ const Chat = () => {
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
-                    setSocketConnectedStatus={setSocketConnectedStatus}
+                    setSocketConnectedStatus={SocketStatus}
                 />
             </div>
     </section>

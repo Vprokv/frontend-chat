@@ -18,30 +18,30 @@ const DialogsNew = ({
         <Link to={`/dialog/${dialog._id_dialog}`}>
             <div
                 className={classNames('dialogs__item', {
-                    // 'dialogs__item--online': dialog.partner.isOnline,
+
                     'dialogs__item--selected': currentDialog === dialog._id_dialog
                 })}
                 onClick={onSelect.bind(this, dialog._id_dialog)}
             >
                 <div className="dialogs__item-avatar">
-                    <Avatar
-                        user={dialog}
-                    />
+                    {userMeta && <Avatar
+                        user={userMeta}
+                    />}
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        <b>{dialog.name}</b>
+                        {userMeta && <b>{userMeta.fullname}</b>}
                         <span>
-                    {meta.lastMessage.createdAt &&
+                    {meta.createdat &&
                     <MessageTime
-                        date={meta.lastMessage.createdAt}
+                        date={meta.createdat}
                     />
                     }
                 </span>
                     </div>
                     <div className="dialogs__item-info-bottom">
                         <p>
-                            {meta.lastMessage.text}
+                            {meta.text}
                         </p>
 
                         {meta.unread > 0 && <div className="dialogs__item-info-bottom-count">

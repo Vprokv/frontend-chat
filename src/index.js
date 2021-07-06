@@ -9,7 +9,7 @@ import {userActions} from "./pages/Chat/redux/actions";
 import store from "./pages/Chat/redux/store"
 import './styles/index.scss';
 import 'emoji-mart/css/emoji-mart.css'
-import "./pages/Chat/core/socket"
+// import "./pages/Chat/core/socket"
 import { createBrowserHistory } from "history"
 store.dispatch(userActions.fetchUserData());
 export const history = createBrowserHistory()

@@ -13,9 +13,8 @@ const SidebarNew = ({
                         dialogs,
                         dialogsMeta,
                         setCurrentDialog,
-    userMeta,
-
-}) => {
+                        userMeta,
+                    }) => {
     const [visible, setVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [headerText, setHeaderText] = useState("");
@@ -74,7 +73,8 @@ const SidebarNew = ({
     const onChangeTextArea = e => {
         setHeaderText(e.target.value)
     }
-console.log(dialogs)
+
+
 
     return (
         <div className="chat__sidebar">
@@ -93,13 +93,7 @@ console.log(dialogs)
                     icon={<FormOutlined/>}
                 />
             </div>
-            <div className="dialogs__search">
-                <Input
-                    placeholder="Поиск среди контактов"
-                    // onChange={e => onSearch(e.target.value)}
-                    // value={inputValue}
-                />
-            </div>
+
 
             <div className="chat__sidebar-dialogs">
 

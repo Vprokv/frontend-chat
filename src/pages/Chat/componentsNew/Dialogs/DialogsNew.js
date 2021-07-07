@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import './DialogsNew.scss';
 import MessageTime from "./getMessageTime"
+import userCont from "../userCont"
 const DialogsNew = ({
                         dialog,
                         meta,
@@ -16,6 +17,9 @@ const DialogsNew = ({
 
     return (
         <Link to={`/dialog/${dialog._id_dialog}`}>
+            {/*<userCont*/}
+            {/*// user_id={}*/}
+            {/*/>*/}
             <div
                 className={classNames('dialogs__item', {
 

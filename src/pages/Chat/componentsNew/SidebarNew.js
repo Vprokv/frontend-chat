@@ -80,11 +80,7 @@ const SidebarNew = ({
         <div className="chat__sidebar">
             <div className="chat__sidebar-header">
                 <div>
-                    <Button
-                        type="link"
-                        icon={<TeamOutlined/>}
-                    />
-
+                    <TeamOutlined/>
                     <span>Список диалогов</span>
                 </div>
                 <Button
@@ -120,7 +116,6 @@ const SidebarNew = ({
                             Закрыть
                         </Button>,
                         <Button
-                            disabled={!headerText}
                             key="submit"
                             type="primary"
                             loading={isLoading}
@@ -149,15 +144,6 @@ const SidebarNew = ({
                                 {options}
                             </Select>
                         </Form.Item>
-                    { (
-                        <Form.Item label="Введите название диалога">
-                            <TextArea
-                                autosize={{ minRows: 3, maxRows: 5 }}
-                                onChange={onChangeTextArea}
-                                value={headerText}
-                            />
-                        </Form.Item>
-                    )}
                     </Form>
                 </Modal>
             </div>

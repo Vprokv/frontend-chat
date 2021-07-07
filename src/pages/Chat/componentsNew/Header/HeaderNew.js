@@ -14,7 +14,7 @@ const HeaderNew = ({
         return null;
     }
     const currentDialogObj = dialogs.filter(dialog => dialog._id_dialog === currentDialog)[0];
-    // const online = (currentDialogObj.partner.isOnline === true) ? true : "";
+
 
     const RemoveDialog = async (id) => {
         if (window.confirm("Вы действительно хотите удалить сообщение")) {
@@ -29,12 +29,6 @@ const HeaderNew = ({
                 <b className="chat__dialog-header-username">
                     {userMeta[currentDialog].fullname}
                 </b>
-
-            <span
-                // className={online === true ? "status--online" : "status"}
-            >
-                {/*{online === true ? "онлайн" : "офлайн"}*/}
-            </span>
             <Popover
                 content={
                     <Button

@@ -22,8 +22,8 @@ const Chat = () => {
         })})
     }, [])
 
-
     const onRemoveMessage = useCallback(({message_id, dialog_id}) => {
+
         setMessages((prevMessages) => {
             const nextMessages = [...prevMessages[dialog_id]]
             nextMessages.splice(
@@ -39,14 +39,58 @@ const Chat = () => {
     }, [])
 
     const onNewDialog = useCallback((dialog) => {
-        setDialogs((prevDialogs) => [...prevDialogs, dialog])}, [])
+        setDialogs((prevDialogs) => {
+
+                return (
+                    [...prevDialogs, dialog]
+                )
+            }
+        )
+    }, [])
+    console.log(dialogs)
+
+    // const onNewUserMeta = useCallback((userMeta) => {
+        // console.log(userMeta)
+        // const userMetaObj = userMeta.reduce((acc, current) => {
+        //     const key= current._id_dialog;
+        //     return {
+        //         ...acc,
+        //         [key]:current
+        //     }
+        // }, {})
+        // console.log(userMetaObj)
+        // setUserMeta((setUserMeta) => {
+        //
+        //         return ({
+        //             ...setUserMeta, userMetaObj
+        //         })
+        //     }
+        // )
+    //     return null
+    // }, [])
+
+    const onNewMeta = useCallback((dialogMeta) => {
+        setDialogsMeta((prevDialogsMeta) => {
+            return({
+                ...prevDialogsMeta,
+                [dialogMeta.dialog_id]: dialogMeta
+            })})
+    }, [])
 
     const onRemoveDialog = useCallback(({dialog_id}) => {
-        setDialogs((prevDialogs) => [...prevDialogs]
-                .splice(
-                    prevDialogs.findIndex(({_id})=>dialog_id===_id),
-                    1)
-        )}, [])
+
+        setDialogs((prevDialogs) => {
+                const nexDialogs = [...prevDialogs]
+                nexDialogs.splice(
+                    prevDialogs.findIndex(({_id_dialog}) => Number(dialog_id)=== _id_dialog),
+                    1
+                )
+                return (
+                    nexDialogs
+                )
+            }
+        )
+    }, [])
 
     const SocketStatus = useCallback(() => {
         setSocketConnectedStatus((prevStatus) => !prevStatus)
@@ -59,7 +103,6 @@ const Chat = () => {
             })()
         }
     }, [socketConnected])
-
 
 
     useEffect(() => {
@@ -93,8 +136,6 @@ const Chat = () => {
             })()
         }
     }, [socketConnected])
-
-
 
     return (
     <section className="home chat">
@@ -134,6 +175,8 @@ const Chat = () => {
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
+                    // onNewUserMeta={onNewUserMeta}
+                    onNewMeta={onNewMeta}
                     setSocketConnectedStatus={SocketStatus}
                 />
             </div>

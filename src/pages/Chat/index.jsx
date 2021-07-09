@@ -8,10 +8,9 @@ import "./Chat.scss";
 
 const Chat = () => {
     const [socketConnected, setSocketConnectedStatus] = useState(false)
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState({})
     const [dialogs, setDialogs] = useState([])
     const [dialogsMeta, setDialogsMeta] = useState({})
-    const [userMeta, setUserMeta] = useState({})
     const [currentDialog, setCurrentDialog] = useState("")
 
     const onNewMessage = useCallback((newMessage) => {
@@ -47,27 +46,6 @@ const Chat = () => {
             }
         )
     }, [])
-    console.log(dialogs)
-
-    // const onNewUserMeta = useCallback((userMeta) => {
-        // console.log(userMeta)
-        // const userMetaObj = userMeta.reduce((acc, current) => {
-        //     const key= current._id_dialog;
-        //     return {
-        //         ...acc,
-        //         [key]:current
-        //     }
-        // }, {})
-        // console.log(userMetaObj)
-        // setUserMeta((setUserMeta) => {
-        //
-        //         return ({
-        //             ...setUserMeta, userMetaObj
-        //         })
-        //     }
-        // )
-    //     return null
-    // }, [])
 
     const onNewMeta = useCallback((dialogMeta) => {
         setDialogsMeta((prevDialogsMeta) => {
@@ -76,6 +54,7 @@ const Chat = () => {
                 [dialogMeta.dialog_id]: dialogMeta
             })})
     }, [])
+
 
     const onRemoveDialog = useCallback(({dialog_id}) => {
 
@@ -128,22 +107,12 @@ const Chat = () => {
         }
     }, [socketConnected])
 
-    useEffect(() => {
-        if (socketConnected) {
-            (async () => {
-                setUserMeta(await getUserMeta())
-
-            })()
-        }
-    }, [socketConnected])
 
     return (
     <section className="home chat">
             <SidebarNew
                 dialogs={dialogs}
                 dialogsMeta={dialogsMeta}
-                userMeta={userMeta}
-                setUserMeta={setUserMeta}
                 currentDialog={currentDialog}
                 setCurrentDialog={setCurrentDialog}
             />
@@ -152,7 +121,7 @@ const Chat = () => {
                     <HeaderNew
                         dialogs={dialogs}
                         currentDialog={currentDialog}
-                        userMeta={userMeta}
+                        dialogsMeta={dialogsMeta}
                     />
                 </div>
                 {!currentDialog ?
@@ -175,7 +144,6 @@ const Chat = () => {
                     onRemoveMessage={onRemoveMessage}
                     onNewDialog={onNewDialog}
                     onRemoveDialog={onRemoveDialog}
-                    // onNewUserMeta={onNewUserMeta}
                     onNewMeta={onNewMeta}
                     setSocketConnectedStatus={SocketStatus}
                 />

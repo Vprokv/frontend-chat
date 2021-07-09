@@ -13,10 +13,11 @@ export const getDialogMeta = async() => {
     return data
 }
 
-export const getUserMeta = async() => {
-    const {data} = await axios.get("/user/meta")
+export const getFullNameForUser = async(user_id) => {
+    const {data} = await axios.get("/user?user_id=" + user_id)
     return data
 }
+
 
 export const getDialog = async () => {
     const {data} = await axios.get("/dialogs")

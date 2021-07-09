@@ -4,11 +4,6 @@ import './Avatar.scss';
 import {generateAvatarFromHash, upperCase} from "../../utils/helpers";
 
 
-const getRandomInRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-getRandomInRange(1, 10)
 
 const Avatar = ({user}) => {
     if (user.avatar) {
@@ -35,7 +30,7 @@ const Avatar = ({user}) => {
 
 Avatar.defaultProps = {
     user: {
-        fullname:PropTypes.string,
+        fullname: "",
         avatar: {},
     },
 };

@@ -13,7 +13,6 @@ const SidebarNew = ({
                         dialogs,
                         dialogsMeta,
                         setCurrentDialog,
-                        userMeta,
                     }) => {
     const [visible, setVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -98,7 +97,6 @@ const SidebarNew = ({
                     <DialogsNew
                         dialog={dialog}
                         meta={dialogsMeta[dialog._id_dialog]}
-                        userMeta={userMeta[dialog._id_dialog]}
                         onClick={() => setCurrentDialog(dialog._id_dialog)}
                         onSelect={setCurrentDialog}
                     />

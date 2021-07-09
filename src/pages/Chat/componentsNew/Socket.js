@@ -6,7 +6,6 @@ const Socket = ({
                     onRemoveMessage,
                     onNewDialog,
                     onRemoveDialog,
-                    // onNewUserMeta,
                     onNewMeta,
                     setSocketConnectedStatus,
                 }) => {
@@ -30,19 +29,20 @@ const Socket = ({
 
     }, [socket])
 
-    // useEffect(() => {
-    //     if (socket) {
-    //         socket.on("SERVER:NEW_USER_META", onNewUserMeta);
-    //         return () => socket.removeListener("SERVER:NEW_USER_META", onNewUserMeta)
-    //         // eslint-disable-next-line react-hooks/exhaustive-deps
-    //     }
-    //
-    // }, [socket])
 
     useEffect(() => {
         if (socket) {
-            socket.on("SERVER:NEW_META", onNewMeta);
-            return () => socket.removeListener("SERVER:NEW_META", onNewMeta)
+            socket.on("SERVER:NEW_META_SEND", onNewMeta);
+            return () => socket.removeListener("SERVER:NEW_META_SEND", onNewMeta)
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }
+
+    }, [socket])
+
+    useEffect(() => {
+        if (socket) {
+            socket.on("SERVER:NEW_META_REMOVE", onNewMeta);
+            return () => socket.removeListener("SERVER:NEW_META_REMOVE", onNewMeta)
             // eslint-disable-next-line react-hooks/exhaustive-deps
         }
 

@@ -1,24 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from "../Avatar/Avatar";
 import classNames from "classnames";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import './DialogsNew.scss';
 import MessageTime from "./getMessageTime"
-import userCont from "../userCont"
+import UserCont from "../UserCont"
+import {connect} from "react-redux";
+import {getFullNameForUser} from "../../Api";
+
 const DialogsNew = ({
                         dialog,
                         meta,
                         currentDialog,
                         onSelect,
-    userMeta
+                        user
                     }) => {
+    const {id_user} = dialog
+
+    const [fullName, setFullName] = useState("");
+    const currentId = id_user && id_user.filter(id => id != user._id)[0];
+
+
+
+    useEffect(() => {
+        if (currentId) {
+            (async () => {
+                const data = await getFullNameForUser(currentId)
+                return setFullName(data)
+            })()
+
+
+        }
+    }, [id_user])
+
+    const dataForAvatar = {
+        id_user: currentId,
+        fullname: fullName,
+        avatar: null
+
+    }
+
 
 
     return (
         <Link to={`/dialog/${dialog._id_dialog}`}>
-            {/*<userCont*/}
-            {/*// user_id={}*/}
+            {/*<UserCont*/}
+            {/*id_user={id_user}*/}
+            {/*setFullname={setFullName}*/}
+            {/*currentDialog={currentDialog}*/}
             {/*/>*/}
             <div
                 className={classNames('dialogs__item', {
@@ -28,13 +58,13 @@ const DialogsNew = ({
                 onClick={onSelect.bind(this, dialog._id_dialog)}
             >
                 <div className="dialogs__item-avatar">
-                    {userMeta && <Avatar
-                        user={userMeta}
+                    {dataForAvatar && <Avatar
+                        user={dataForAvatar}
                     />}
                 </div>
                 <div className="dialogs__item-info">
                     <div className="dialogs__item-info-top">
-                        {userMeta && <b>{userMeta.fullname}</b>}
+                        {meta && <b>{fullName}</b>}
                         <span>
                     {meta.createdat &&
                     <MessageTime
@@ -105,7 +135,13 @@ DialogsNew.defaultProps = {
             _id: "",
             fullName: "",
         }
-    }
+    },
+    id_user: [],
+    currentId: "",
+    user: {},
+
 };
 
-export default DialogsNew;
+export default connect(
+    ({user}) => ({user: user.data}))(DialogsNew);
+// export default DialogsNew;
